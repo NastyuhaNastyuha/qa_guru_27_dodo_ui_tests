@@ -1,5 +1,6 @@
 package tests;
 
+import com.codeborne.selenide.Condition;
 import components.DeliveryMethodPopUp;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -7,12 +8,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.MainPage;
 import components.SelectCityPopUp;
-import testData.AdditiveItem;
-import testData.ComboItem;
-import testData.SimpleItem;
+import testData.*;
 
 import java.util.ArrayList;
 
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
 import static components.DeliveryMethods.DELIVERY;
 import static components.DeliveryMethods.PICKUP;
 import static io.qameta.allure.Allure.*;
@@ -24,14 +25,19 @@ public class DodopizzaWebTests extends TestBase {
     MainPage mainPage = new MainPage();
     SelectCityPopUp cityPopUp = new SelectCityPopUp();
     DeliveryMethodPopUp deliveryMethodPopUp = new DeliveryMethodPopUp();
-//    @Test
-//    void test() {
-//        open("https://dodopizza.ru/");
-//        $("[data-testid='locality-selector-popup__search-input']").click();
-//        $("[data-testid='locality-selector-popup__search-input']").setValue("омск");
-//        $$(".locality-selector-popup__table__group").findBy(Condition.text("Омск")).click();
-//        $("[data-testid='header__about-slogan-text_link']").shouldHave(Condition.text("Омск"));
-//    }
+    @Test
+    void test() {
+        open("https://dodopizza.ru/");
+        $("[data-testid='locality-selector-popup__search-input']").click();
+        $("[data-testid='locality-selector-popup__search-input']").setValue("омск");
+        $$(".locality-selector-popup__table__group").findBy(Condition.text("Омск")).click();
+        $("[data-testid='menu__meta-product_11eceba2b8864f6e96179b0606a94a70']").click();
+        $(".scroll__view").find(withText("тесто")).parent().sibling(0)
+                .find(withTextCaseInsensitive("цыпленок")).click();
+
+        System.out.println("debug");
+        //$("[data-testid='header__about-slogan-text_link']").shouldHave(Condition.text("Омск"));
+    }
 
     @DisplayName("Простой товар из блока \"Часто заказывают\" можно добавить в корзину. " +
             "Способ получения -- забрать из пиццерии")
@@ -90,7 +96,7 @@ public class DodopizzaWebTests extends TestBase {
         String doorCode = "2";
         String floor = "13";
         String apartment = "123";
-        String comment = "И водочки нам принеси, мы домой летим";
+        String comment = "При входе в подъезд поздоровайтесь с тётей Зиной";
 
 
 
@@ -156,6 +162,65 @@ public class DodopizzaWebTests extends TestBase {
             "Способ получения -- доставка")
     @Test
     void itemsWithModifiersShouldBeAddedToCartFromMainPage() {
+        String city = "Омск";
+        String address = "омск дзержинского 1";
+        String entrance = "1";
+        String doorCode = "2";
+        String floor = "13";
+        String apartment = "123";
+        String comment = "При входе в подъезд поздоровайтесь с тётей Зиной";
+
+        PizzaItem pizzaItem = new PizzaItem();
+        pizzaItem.setPizzaName("Пицца Жюльен");
+        pizzaItem.setPizzaSize(PizzaSize.BIG);
+        pizzaItem.setPizzaPrice(899);
+        pizzaItem.setDough("Тонкое");
+
+        AdditiveItem excludedItem_1 = new AdditiveItem();
+        excludedItem_1.setItemName("красный лук");
+
+        AdditiveItem excludedItem_2 = new AdditiveItem();
+        excludedItem_2.setItemName("чеснок");
+
+        ArrayList<AdditiveItem> excludedItems = new ArrayList<>();
+        excludedItems.add(excludedItem_1);
+        excludedItems.add(excludedItem_2);
+        pizzaItem.setExcludedItems(excludedItems);
+
+        AdditiveItem additiveItem = new AdditiveItem();
+        additiveItem.setItemName("Острый перец халапеньо");
+        additiveItem.setItemSurcharge(79);
+
+        ArrayList<AdditiveItem> additiveItems = new ArrayList<>();
+        additiveItems.add(additiveItem);
+        pizzaItem.setAdditiveItems(additiveItems);
+
+
+        step("Открыть страницу", () -> {
+            mainPage.openPage();
+        });
+
+        step("Выбрать город", () -> {
+            mainPage.selectCity(city)
+                    .closeCookiePolicy();
+        });
+
+        step("Выбрать категорию в меню", () -> {
+            mainPage.goToCategoryFromMenu("Пиццы");
+        });
+
+        step("Добавить пиццу в корзину", () -> {
+            mainPage.addPizzaToCart(pizzaItem);
+        });
+        step("Выбрать способ доставки", () -> {
+            mainPage.chooseDeliveryMethod(DELIVERY);
+        });
+        step("Ввести адрес доставки", () -> {
+            mainPage.enterPickupAddress(address, entrance, doorCode, floor, apartment, comment);
+        });
+        step("Проверить, что пицца добавлена в корзину", () -> {
+           mainPage.checkThatPizzaItemInCart(pizzaItem);
+        });
 
     }
 

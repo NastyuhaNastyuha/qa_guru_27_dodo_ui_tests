@@ -7,10 +7,12 @@ import components.DeliveryMethods;
 import components.OftenOrderedSimpleItemCard;
 import components.SelectCityPopUp;
 import testData.ComboItem;
+import testData.PizzaItem;
+import testData.PizzaSize;
 import testData.SimpleItem;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class MainPage {
@@ -82,6 +84,12 @@ public class MainPage {
     static final SelenideElement apartmentInput = $("[name='apartment']");
     static final SelenideElement commentInput = $("[name='comment']");
     static final SelenideElement addAddressButton = $("[data-testid='add_or_save_spinner_button']");
+
+    //для пиццы с модификаторами
+    static final SelenideElement pizzaSection = $("#guzhy");
+    //static final SelenideElement pizzaSizeButton = $()
+    static final SelenideElement itemModifyingArea = $(".scroll__view");
+    static final SelenideElement pizzaPopupAddToCartButton = $("[data-testid='button_add_to_cart']");
 
     public MainPage openPage() {
         open("https://dodopizza.ru/");
@@ -165,7 +173,17 @@ public class MainPage {
     public MainPage checkThatComboItemInCart(ComboItem comboItem) {
         cartButton.click();
         cartPopup.$$("article").findBy(text(comboItem.getComboName())).shouldHave(text(comboItem.getComboName()));
-        cartPopup.$$("article").findBy(text(comboItem.getComboName())).$(".current").shouldHave(text((comboItem.getComboPrice().toString())));
+        cartPopup.$$("article").findBy(text(comboItem.getComboName())).$(".current").shouldHave(text((comboItem
+                .getComboPrice().toString())));
+
+        return this;
+    }
+
+    public MainPage checkThatPizzaItemInCart(PizzaItem pizzaItem) {
+        cartButton.click();
+        cartPopup.$$("article").findBy(text(pizzaItem.getPizzaName())).shouldHave(text(pizzaItem.getPizzaName()));
+        cartPopup.$$("article").findBy(text(pizzaItem.getPizzaName())).$(".current").shouldHave(text((pizzaItem
+                .getPizzaPrice().toString())));
 
         return this;
     }
@@ -200,6 +218,29 @@ public class MainPage {
 
     public MainPage goToCategoryFromMenu(String category) {
         menu.$$("li").findBy(text(category)).click();
+        return this;
+    }
+
+    public MainPage addPizzaToCart(PizzaItem pizzaItem) {
+        PizzaSize pizzaSize = pizzaItem.getPizzaSize();
+
+        pizzaSection.$$("article").findBy(text(pizzaItem.getPizzaName())).click();
+        $(pizzaSize.getSelector()).click();
+        itemModifyingArea.find(byText(pizzaItem.getDough())).click();
+        itemModifyingArea.find(withText("тесто")).parent().sibling(0)
+                .find(withTextCaseInsensitive(pizzaItem.getExcludedItems().get(0).getItemName())).click();
+        itemModifyingArea.find(withText("тесто")).parent().sibling(0)
+                .find(withTextCaseInsensitive(pizzaItem.getExcludedItems().get(1).getItemName())).click();
+
+        itemModifyingArea.find(byText("Добавить по вкусу")).sibling(0)
+                .$$("button").findBy(text(pizzaItem.getAdditiveItems().get(0)
+                        .getItemName())).click();
+        Integer price = pizzaItem.getPizzaPrice() + pizzaItem.getAdditiveItems().get(0)
+                .getItemSurcharge();
+        pizzaItem.setPizzaPrice(price);
+
+        pizzaPopupAddToCartButton.click();
+
         return this;
     }
 
