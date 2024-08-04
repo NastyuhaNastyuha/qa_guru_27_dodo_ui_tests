@@ -23,21 +23,20 @@ import static io.qameta.allure.Allure.*;
 public class DodopizzaWebTests extends TestBase {
 
     MainPage mainPage = new MainPage();
-    SelectCityPopUp cityPopUp = new SelectCityPopUp();
-    DeliveryMethodPopUp deliveryMethodPopUp = new DeliveryMethodPopUp();
-    @Test
-    void test() {
-        open("https://dodopizza.ru/");
-        $("[data-testid='locality-selector-popup__search-input']").click();
-        $("[data-testid='locality-selector-popup__search-input']").setValue("омск");
-        $$(".locality-selector-popup__table__group").findBy(Condition.text("Омск")).click();
-        $("[data-testid='menu__meta-product_11eceba2b8864f6e96179b0606a94a70']").click();
-        $(".scroll__view").find(withText("тесто")).parent().sibling(0)
-                .find(withTextCaseInsensitive("цыпленок")).click();
-
-        System.out.println("debug");
-        //$("[data-testid='header__about-slogan-text_link']").shouldHave(Condition.text("Омск"));
-    }
+//    SelectCityPopUp cityPopUp = new SelectCityPopUp();
+//    DeliveryMethodPopUp deliveryMethodPopUp = new DeliveryMethodPopUp();
+//    @Test
+//    void test() {
+//        open("https://dodopizza.ru/");
+//        $("[data-testid='locality-selector-popup__search-input']").click();
+//        $("[data-testid='locality-selector-popup__search-input']").setValue("омск");
+//        $$(".locality-selector-popup__table__group").findBy(Condition.text("Омск")).click();
+//        $("[data-testid='menu__meta-product_11eceba2b8864f6e96179b0606a94a70']").click();
+//        $(".scroll__view").find(withText("тесто")).parent().sibling(0)
+//                .find(withTextCaseInsensitive("цыпленок")).click();
+//
+//        //$("[data-testid='header__about-slogan-text_link']").shouldHave(Condition.text("Омск"));
+//    }
 
     @DisplayName("Простой товар из блока \"Часто заказывают\" можно добавить в корзину. " +
             "Способ получения -- забрать из пиццерии")
