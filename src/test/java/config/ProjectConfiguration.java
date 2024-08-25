@@ -1,6 +1,9 @@
 package config;
 
 import com.codeborne.selenide.Configuration;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 
 public class ProjectConfiguration {
@@ -11,6 +14,11 @@ public class ProjectConfiguration {
     }
 
     public void webConfig() {
+//        ChromeOptions chromeOptions = new ChromeOptions();
+//
+//        chromeOptions.addArguments("--disable-popup-blocking");
+        //WebDriver driver = new ChromeDriver(chromeOptions);
+
         Configuration.browser = webConfig.browser().toString();
         Configuration.browserVersion = webConfig.browserVersion();
         Configuration.browserSize = webConfig.browserSize();

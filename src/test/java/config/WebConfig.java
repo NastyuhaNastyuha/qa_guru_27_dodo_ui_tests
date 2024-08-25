@@ -21,7 +21,7 @@ public interface WebConfig extends Config {
     @DefaultValue("1920x1080")
     String browserSize();
 
-    @DefaultValue("https://demoqa.com")
+    @DefaultValue("https://dodopizza.ru")
     String baseUrl();
 
     @DefaultValue("false")

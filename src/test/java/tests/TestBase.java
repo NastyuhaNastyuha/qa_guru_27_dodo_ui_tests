@@ -10,8 +10,12 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
@@ -44,7 +48,18 @@ public class TestBase {
 
         //Configuration.browserSize = "1920x1080";
         //Configuration.pageLoadStrategy = "eager";
-        WebDriverManager.chromedriver().setup();
+
+        //WebDriverManager.chromedriver().setup();
+
+//        ChromeOptions chromeOptions = new ChromeOptions();
+//        //chromeOptions.setExperimentalOption("excludeSwitches", List.of("disable-popup-blocking"));
+//        chromeOptions.addArguments("--disable-popup-blocking");
+//        WebDriver driver = new ChromeDriver(chromeOptions);
+        //driver.manage();
+
+
+
+//        chromeOptions.setEnableDownloads(true)
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(

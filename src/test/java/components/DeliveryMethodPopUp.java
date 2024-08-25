@@ -2,6 +2,9 @@ package components;
 
 import com.codeborne.selenide.SelenideElement;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class DeliveryMethodPopUp {
@@ -9,10 +12,12 @@ public class DeliveryMethodPopUp {
     static final SelenideElement deliveryButton = $("[data-testid='how_to_get_order_delivery_action']");
 
     public void choosePickup() {
+        pickupButton.shouldBe(visible, Duration.ofSeconds(30));
         pickupButton.click();
     }
 
     public void chooseDelivery() {
+        deliveryButton.shouldBe(visible, Duration.ofSeconds(30));
         deliveryButton.click();
     }
 }

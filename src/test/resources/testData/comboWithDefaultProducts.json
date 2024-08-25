@@ -1,0 +1,42 @@
+{
+  "comboName": "Комбо Завтрак на двоих",
+  "comboPrice": "549",
+  "products": [
+    {
+      "itemName": "Омлет с беконом",
+      "itemPrice": "",
+      "itemSurcharge": "",
+      "itemInComboId": "",
+      "itemOrderInCombo": "1",
+      "itemWeight": "",
+      "additiveItems": []
+    },
+    {
+      "itemName": "Омлет с ветчиной и грибами",
+      "itemPrice": "",
+      "itemSurcharge": "",
+      "itemInComboId": "",
+      "itemOrderInCombo": "2",
+      "itemWeight": "",
+      "additiveItems": []
+    },
+    {
+      "itemName": "Кофе Латте",
+      "itemPrice": "",
+      "itemSurcharge": "",
+      "itemInComboId": "",
+      "itemOrderInCombo": "3",
+      "itemWeight": "",
+      "additiveItems": []
+    },
+    {
+      "itemName": "Кофе Капучино",
+      "itemPrice": "",
+      "itemSurcharge": "",
+      "itemInComboId": "",
+      "itemOrderInCombo": "4",
+      "itemWeight": "",
+      "additiveItems": []
+    }
+  ]
+}

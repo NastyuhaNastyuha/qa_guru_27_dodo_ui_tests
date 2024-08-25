@@ -1,0 +1,26 @@
+{
+  "pizzaName": "Пицца Жюльен",
+  "pizzaPrice": "899",
+  "pizzaSize": "BIG",
+  "dough": "Тонкое",
+  "additiveItems": [
+    {
+      "itemName": "Острый перец халапеньо",
+      "itemSurcharge": "79"
+    },
+    {
+      "itemName": "Креветки",
+      "itemSurcharge": "219"
+    }
+  ],
+  "excludedItems": [
+    {
+      "itemName": "красный лук",
+      "itemSurcharge": ""
+    },
+    {
+      "itemName": "чеснок",
+      "itemSurcharge": ""
+    }
+  ]
+}
