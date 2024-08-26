@@ -145,15 +145,16 @@ public class MainPage {
         return this;
     }
 
-    public MainPage choosePickupAddress_test(PickupAddress address) {
+    public MainPage choosePickupAddress_test(PickupAddress address) throws InterruptedException {
         pizzeriasList.$$(".list-item").findBy(text(address.getAddress())).click();
-        submitPickupAddressButton.shouldBe(visible, Duration.ofSeconds(30));
+        Thread.sleep(3000);
         submitPickupAddressButton.click();
         return this;
     }
 
-    public MainPage openCart () {
-        cartButton.shouldBe(visible, Duration.ofSeconds(30));
+    public MainPage openCart () throws InterruptedException {
+        //cartButton.shouldBe(visible, Duration.ofSeconds(30));
+        Thread.sleep(3000);
         cartButton.click();
         return this;
     }
