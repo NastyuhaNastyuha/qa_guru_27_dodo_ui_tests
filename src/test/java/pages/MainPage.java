@@ -151,7 +151,7 @@ public class MainPage {
         //class side-content -- отловить, как называется элемент, ждать, пока он исчезнет
         //$(".address__spinner").should(disappear);
         //submitPickupAddressButton.shouldNotBe(disabled);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         submitPickupAddressButton.click();
         return this;
     }
