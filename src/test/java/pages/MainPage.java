@@ -67,8 +67,9 @@ public class MainPage {
         return this;
     }
 
-    public MainPage openProductCardInCategory(String productName, ProductCategory category) {
+    public MainPage openProductCardInCategory(String productName, ProductCategory category) throws InterruptedException {
         menu.$$("li").findBy(text(category.getName())).click();
+        Thread.sleep(1000);
         $(category.getSelector()).find(byText(productName)).shouldBe(visible);
         $(category.getSelector()).find(byText(productName)).click();
         return this;
