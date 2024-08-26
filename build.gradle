@@ -52,9 +52,3 @@ tasks.withType(Test) {
         }
     }
 }
-//
-//task dodopizza_test(type: Test) {
-//    useJUnitPlatform {
-//        includeTags("dodopizza")
-//    }
-//}
