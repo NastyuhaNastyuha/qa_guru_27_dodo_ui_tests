@@ -147,6 +147,7 @@ public class MainPage {
 
     public MainPage choosePickupAddress_test(PickupAddress address) {
         pizzeriasList.$$(".list-item").findBy(text(address.getAddress())).click();
+        submitPickupAddressButton.shouldBe(visible, Duration.ofSeconds(30));
         submitPickupAddressButton.click();
         return this;
     }
