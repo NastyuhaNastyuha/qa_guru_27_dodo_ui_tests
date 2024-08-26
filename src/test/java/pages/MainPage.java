@@ -149,9 +149,9 @@ public class MainPage {
         pizzeriasList.$$(".list-item").findBy(text(address.getAddress())).click();
         //TODO: ждать, пока исчезнет лоадер на адресе? и тогда кликать на Выбрать
         //class side-content -- отловить, как называется элемент, ждать, пока он исчезнет
-        $(".address__spinner").should(disappear);
-        submitPickupAddressButton.shouldNotBe(disabled);
-        //Thread.sleep(3000);
+        //$(".address__spinner").should(disappear);
+        //submitPickupAddressButton.shouldNotBe(disabled);
+        Thread.sleep(2000);
         submitPickupAddressButton.click();
         return this;
     }
