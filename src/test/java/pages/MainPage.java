@@ -150,6 +150,7 @@ public class MainPage {
         //TODO: ждать, пока исчезнет лоадер на адресе? и тогда кликать на Выбрать
         //class side-content -- отловить, как называется элемент, ждать, пока он исчезнет
         $(".address__spinner").should(disappear);
+        submitPickupAddressButton.shouldNotBe(disabled);
         //Thread.sleep(3000);
         submitPickupAddressButton.click();
         return this;
