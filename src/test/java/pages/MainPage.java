@@ -69,6 +69,7 @@ public class MainPage {
 
     public MainPage openProductCardInCategory(String productName, ProductCategory category) {
         menu.$$("li").findBy(text(category.getName())).click();
+        $(category.getSelector()).find(byText(productName)).shouldBe(visible);
         $(category.getSelector()).find(byText(productName)).click();
         return this;
     }
