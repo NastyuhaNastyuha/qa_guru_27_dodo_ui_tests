@@ -2,6 +2,9 @@ package tests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,14 +22,16 @@ import static models.testDataModels.ProductCategory.PIZZA;
 @Story("Создание заказа")
 @Feature("Добавление товара в корзину")
 @DisplayName("Тесты на добавление товаров в корзину")
-public class DodopizzaWebTests extends TestBase {
+public class AddToCartTests extends TestBase {
 
     MainPage mainPage = new MainPage();
-    ClassLoader classLoader = DodopizzaWebTests.class.getClassLoader();
+    ClassLoader classLoader = AddToCartTests.class.getClassLoader();
 
     @DisplayName("Простой товар можно добавить в корзину. " +
             "Способ получения -- забрать из пиццерии")
     @Test
+    @Owner("rybinaa")
+    @Severity(SeverityLevel.CRITICAL)
     void simpleItemShouldBeAddedToCart() throws Exception{
         try (InputStream inputStreamForAddress = classLoader
                 .getResourceAsStream("testData/pickupAddress.json")) {
@@ -71,6 +76,8 @@ public class DodopizzaWebTests extends TestBase {
     @DisplayName("Простой товар можно добавить в корзину  с главной страницы. " +
             "Способ получения -- забрать из пиццерии")
     @Test
+    @Owner("rybinaa")
+    @Severity(SeverityLevel.NORMAL)
     void simpleItemShouldBeAddedToCartFromMainPage() throws Exception{
         try (InputStream inputStreamForAddress = classLoader
                 .getResourceAsStream("testData/pickupAddress.json")) {
@@ -116,6 +123,8 @@ public class DodopizzaWebTests extends TestBase {
     @DisplayName("Пиццу с дефолтными модификаторами можно добавить в корзину с главной страницы. " +
             "Способ получения -- доставка")
     @Test
+    @Owner("rybinaa")
+    @Severity(SeverityLevel.NORMAL)
     void pizzaWithDefaultModifiersShouldBeAddedToCart() throws Exception{
         try (InputStream inputStreamForAddress = classLoader
                 .getResourceAsStream("testData/deliveryAddressWithAllFieldsAreFilled.json")) {
@@ -137,14 +146,12 @@ public class DodopizzaWebTests extends TestBase {
                 });
 
                 step("Открыть карточку товара", () -> {
-                    //mainPage.openProductCard(pizzaItem.getPizzaName());
                     mainPage.openProductCardInCategory(pizzaItem.getPizzaName(), PIZZA);
 
                 });
                 step("Добавить пиццу в корзину", () -> {
                     mainPage.addProductToCartFromPopup();
                 });
-
 
                 step("Выбрать способ доставки", () -> {
                     mainPage.chooseDeliveryMethod(DELIVERY);
@@ -166,6 +173,8 @@ public class DodopizzaWebTests extends TestBase {
     @DisplayName("Пиццу с модификаторами можно добавить в корзину с главной страницы. " +
             "Способ получения -- доставка")
     @Test
+    @Owner("rybinaa")
+    @Severity(SeverityLevel.NORMAL)
     void pizzaWithModifiersShouldBeAddedToCart() throws Exception {
         try (InputStream inputStreamForAddress = classLoader
                 .getResourceAsStream("testData/deliveryAddressWithAllFieldsAreFilled.json")) {
@@ -207,8 +216,6 @@ public class DodopizzaWebTests extends TestBase {
                 step("Добавить пиццу в корзину", () -> {
                     mainPage.addProductToCartFromPopup();
                 });
-
-
                 step("Выбрать способ доставки", () -> {
                     mainPage.chooseDeliveryMethod(DELIVERY);
                 });
@@ -227,8 +234,10 @@ public class DodopizzaWebTests extends TestBase {
     }
 
     @DisplayName("Комбо товар с дефолтными продуктами можно добавить в корзину с главной страницы. " +
-            "Способ получения -- доставка")
+            "Способ получения -- самовывоз")
     @Test
+    @Owner("rybinaa")
+    @Severity(SeverityLevel.NORMAL)
     void comboItemWithDefaultProductsShouldBeAddedToCart() throws Exception {
         try (InputStream inputStreamForAddress = classLoader
                 .getResourceAsStream("testData/pickupAddress.json")) {
@@ -261,7 +270,6 @@ public class DodopizzaWebTests extends TestBase {
                     mainPage.chooseDeliveryMethod(PICKUP);
                 });
                 step("Выбрать адрес самовывоза", () -> {
-                    //mainPage.choosePickupAddress(address);
                     mainPage.choosePickupAddress_test(address);
                 });
 
@@ -272,8 +280,6 @@ public class DodopizzaWebTests extends TestBase {
                     step("Проверить, что комбо-товар добавлен в корзину", () -> {
                         mainPage.checkThatComboItemInCart_test(comboItem);
                     });
-
-
                 }
             }
         }
@@ -281,6 +287,8 @@ public class DodopizzaWebTests extends TestBase {
     @DisplayName("Комбо товар с измененными продуктами можно добавить в корзину с главной страницы. " +
             "Способ получения -- доставка")
     @Test
+    @Owner("rybinaa")
+    @Severity(SeverityLevel.NORMAL)
     void comboItemWithModifiedProductsShouldBeAddedToCart_testNewObjectStructure() throws Exception {
         try (InputStream inputStreamForAddress = classLoader
                 .getResourceAsStream("testData/deliveryAddressWithAllFieldsAreFilled.json")) {
@@ -326,7 +334,6 @@ public class DodopizzaWebTests extends TestBase {
                 });
                 step("Ввести адрес доставки", () -> {
                     mainPage.enterPickupAddress_test(address);
-
                 });
 
                 step("Открыть корзину", () -> {

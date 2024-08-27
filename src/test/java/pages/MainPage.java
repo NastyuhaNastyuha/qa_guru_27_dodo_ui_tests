@@ -46,7 +46,6 @@ public class MainPage {
     }
 
     public MainPage selectCity(String city) {
-
         cityPopUp.selectCityBySearch(city);
         cityButton.shouldHave(text(city));
         return this;
@@ -149,19 +148,12 @@ public class MainPage {
 
     public MainPage choosePickupAddress_test(PickupAddress address) throws InterruptedException {
         pizzeriasList.$$(".list-item").findBy(text(address.getAddress())).click();
-        //TODO: ждать, пока исчезнет лоадер на адресе? и тогда кликать на Выбрать
-        //class side-content -- отловить, как называется элемент, ждать, пока он исчезнет
-        //$(".address__spinner").should(disappear);
-        //submitPickupAddressButton.shouldNotBe(disabled);
         Thread.sleep(1000);
         submitPickupAddressButton.click();
         return this;
     }
 
     public MainPage openCart () throws InterruptedException {
-        //cartButton.shouldBe(visible, Duration.ofSeconds(30));
-        //TODO: ждать, пока исчезнет попап с адресом доставки/самовывоза (перехватывает popup_fade при падении)? и тогда кликать на корзину
-        //Thread.sleep(3000);
         $(".popup-fade").should(disappear);
         cartButton.click();
         return this;
