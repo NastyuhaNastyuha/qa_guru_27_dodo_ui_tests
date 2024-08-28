@@ -60,7 +60,7 @@ public class AddToCartTests extends TestBase {
                     mainPage.chooseDeliveryMethod(PICKUP);
                 });
                 step("Выбрать адрес самовывоза", () -> {
-                    mainPage.choosePickupAddress_test(address);
+                    mainPage.choosePickupAddress(address);
                 });
                 step("Открыть корзину", () -> {
                     mainPage.openCart();
@@ -107,7 +107,7 @@ public class AddToCartTests extends TestBase {
                 });
                 step("Выбрать адрес самовывоза", () -> {
 //                    mainPage.choosePickupAddress(address);
-                    mainPage.choosePickupAddress_test(address);
+                    mainPage.choosePickupAddress(address);
                 });
                 step("Открыть корзину", () -> {
                     mainPage.openCart();
@@ -157,7 +157,7 @@ public class AddToCartTests extends TestBase {
                     mainPage.chooseDeliveryMethod(DELIVERY);
                 });
                 step("Ввести адрес доставки", () -> {
-                    mainPage.enterPickupAddress_test(address);
+                    mainPage.enterDeliveryAddress(address);
                 });
                 step("Открыть корзину", () -> {
                     mainPage.openCart();
@@ -220,7 +220,7 @@ public class AddToCartTests extends TestBase {
                     mainPage.chooseDeliveryMethod(DELIVERY);
                 });
                 step("Ввести адрес доставки", () -> {
-                    mainPage.enterPickupAddress_test(address);
+                    mainPage.enterDeliveryAddress(address);
                 });
                 step("Открыть корзину", () -> {
                     mainPage.openCart();
@@ -270,7 +270,7 @@ public class AddToCartTests extends TestBase {
                     mainPage.chooseDeliveryMethod(PICKUP);
                 });
                 step("Выбрать адрес самовывоза", () -> {
-                    mainPage.choosePickupAddress_test(address);
+                    mainPage.choosePickupAddress(address);
                 });
 
                     step("Открыть корзину", () -> {
@@ -333,7 +333,7 @@ public class AddToCartTests extends TestBase {
                     mainPage.chooseDeliveryMethod(DELIVERY);
                 });
                 step("Ввести адрес доставки", () -> {
-                    mainPage.enterPickupAddress_test(address);
+                    mainPage.enterDeliveryAddress(address);
                 });
 
                 step("Открыть корзину", () -> {

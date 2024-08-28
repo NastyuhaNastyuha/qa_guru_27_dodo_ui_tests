@@ -13,7 +13,6 @@ public class ProductCardPopup {
     static final SelenideElement addProductToCartButton = $("[data-testid='button_add_to_cart']");
     static final SelenideElement pizzaModifyingArea = $(".scroll__view");
 
-
     public void addProductToCard() {
         addProductToCartButton.click();
     }

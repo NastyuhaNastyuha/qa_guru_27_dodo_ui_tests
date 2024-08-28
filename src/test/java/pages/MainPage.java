@@ -4,8 +4,6 @@ import com.codeborne.selenide.SelenideElement;
 import components.*;
 import models.testDataModels.*;
 
-import java.time.Duration;
-
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -16,23 +14,14 @@ public class MainPage {
     ProductCardPopup productCardPopup = new ProductCardPopup();
     ComboCardPopup comboCardPopup = new ComboCardPopup();
     CartPopup cartPopupComponent = new CartPopup();
+    NewAddressPopup newAddressPopup = new NewAddressPopup();
+    PizzeriasPopUp pizzeriasPopUp = new PizzeriasPopUp();
 
     static final SelenideElement allProductsSection = $("main");
     static final SelenideElement cityButton = $("[data-testid='header__about-slogan-text_link']");
     static final SelenideElement cartButton = $("[data-testid='navigation__cart']");
-    static final SelenideElement pizzeriasList = $(".pizzerias-list-wrapper");
-    static final SelenideElement submitPickupAddressButton = $("[data-testid='menu_product_select']")
-            .parent();
     static final SelenideElement closeCookiePolicyToastify = $(".cookie-policy-button");
-
-    static final SelenideElement addressInput = $("[data-testid='delivery_placeholder_on_input_street']");
-    static final SelenideElement addressSuggestion = $("[data-testid='two-line-list']").$("li");
-    static final SelenideElement entranceInput = $("[name='porch']");
-    static final SelenideElement doorCodeInput = $("[name='doorCode']");
-    static final SelenideElement floorInput = $("[name='floor']");
-    static final SelenideElement apartmentInput = $("[name='apartment']");
-    static final SelenideElement commentInput = $("[name='comment']");
-    static final SelenideElement addAddressButton = $("[data-testid='add_or_save_spinner_button']");
+    static final SelenideElement itemsInCartCounter = $("[data-testid='cart-button__quantity']");
 
     public MainPage openPage() {
         open("https://dodopizza.ru/");
@@ -126,30 +115,13 @@ public class MainPage {
         return this;
     }
 
-    public MainPage enterPickupAddress_test (DeliveryAddress address) {
-        addressInput.click();
-        addressInput.setValue(address.getAddress());
-        addressSuggestion.shouldBe(visible, Duration.ofSeconds(30));
-        addressSuggestion.click();
-        entranceInput.shouldBe(visible, Duration.ofSeconds(30));
-        entranceInput.click();
-        entranceInput.setValue(address.getEntrance());
-        doorCodeInput.click();
-        doorCodeInput.setValue(address.getDoorCode());
-        floorInput.click();
-        floorInput.setValue(address.getFloor());
-        apartmentInput.click();
-        apartmentInput.setValue(address.getApartment());
-        commentInput.click();
-        commentInput.setValue(address.getComment());
-        addAddressButton.click();
+    public MainPage enterDeliveryAddress(DeliveryAddress address) {
+        newAddressPopup.enterNewAddress(address);
         return this;
     }
 
-    public MainPage choosePickupAddress_test(PickupAddress address) throws InterruptedException {
-        pizzeriasList.$$(".list-item").findBy(text(address.getAddress())).click();
-        Thread.sleep(1000);
-        submitPickupAddressButton.click();
+    public MainPage choosePickupAddress(PickupAddress address) throws InterruptedException {
+        pizzeriasPopUp.choosePickupAddress(address);
         return this;
     }
 
@@ -171,6 +143,31 @@ public class MainPage {
 
     public MainPage checkThatItemInCart_test(SimpleItem simpleItem) {
         cartPopupComponent.checkThatItemInCart_test(simpleItem);
+        return this;
+    }
+
+    public MainPage checkThatItemsInCartCounterNotEmpty() {
+        itemsInCartCounter.should(exist);
+        return this;
+    }
+
+    public MainPage checkCityInPickupAddress(String city) {
+        pizzeriasPopUp.checkCityInPickupAddress(city);
+        return this;
+    }
+
+    public MainPage closePizzeriasPopup() {
+        pizzeriasPopUp.closePopup();
+        return this;
+    }
+
+    public MainPage closeDeliveryMethodPopup() {
+        deliveryMethodPopUp.closePopup();
+        return this;
+    }
+
+    public MainPage openSelectCityPopup() {
+        cityButton.click();
         return this;
     }
 }

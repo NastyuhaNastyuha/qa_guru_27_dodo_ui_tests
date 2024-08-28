@@ -43,13 +43,13 @@ public class TestBase {
         //Configuration.browserVersion = System.getProperty("browserVersion", "125.0.6422.142");
         //Configuration.baseUrl = System.getProperty("baseUrl", "https://dodopizza.ru/");
         //Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
-
-        //Configuration.timeout = 10000;
-
-        //Configuration.browserSize = "1920x1080";
-        //Configuration.pageLoadStrategy = "eager";
-
-        //WebDriverManager.chromedriver().setup();
+//
+//        Configuration.timeout = 10000;
+//
+//        Configuration.browserSize = "1920x1080";
+//        Configuration.pageLoadStrategy = "eager";
+//
+//        WebDriverManager.chromedriver().setup();
 
 //        ChromeOptions chromeOptions = new ChromeOptions();
 //        //chromeOptions.setExperimentalOption("excludeSwitches", List.of("disable-popup-blocking"));
