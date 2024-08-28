@@ -24,9 +24,10 @@ public class MainPage {
     static final SelenideElement itemsInCartCounter = $("[data-testid='cart-button__quantity']");
 
     public MainPage openPage() {
-        open("https://dodopizza.ru/");
+        open("");
         return this;
     }
+
     static final SelenideElement menu = $("nav");
 
     public MainPage closeCookiePolicy() {
@@ -43,8 +44,7 @@ public class MainPage {
     public MainPage chooseDeliveryMethod(DeliveryMethods deliveryMethod) {
         if (deliveryMethod == DeliveryMethods.PICKUP) {
             deliveryMethodPopUp.choosePickup();
-        }
-        else if (deliveryMethod == DeliveryMethods.DELIVERY) {
+        } else if (deliveryMethod == DeliveryMethods.DELIVERY) {
             deliveryMethodPopUp.chooseDelivery();
         }
         return this;
@@ -125,7 +125,7 @@ public class MainPage {
         return this;
     }
 
-    public MainPage openCart () throws InterruptedException {
+    public MainPage openCart() throws InterruptedException {
         $(".popup-fade").should(disappear);
         cartButton.click();
         return this;

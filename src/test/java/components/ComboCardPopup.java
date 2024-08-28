@@ -19,17 +19,17 @@ public class ComboCardPopup {
     }
 
     public Integer replaceSimpleItemInCombo(SimpleItem product) {
-        $(".slots__view").$("[data-id='" + product.getItemInComboId() +"']").
-            find(byText("Заменить")).click();
+        $(".slots__view").$("[data-id='" + product.getItemInComboId() + "']").
+                find(byText("Заменить")).click();
         productsForReplaceArea.find(byText(product.getItemName())).click();
         return product.getItemSurcharge();
     }
 
     public Integer changeItemIngredientsInCombo(SimpleItem product) {
-        $(".slots__view").$("[data-id='" + product.getItemInComboId() +"']").
+        $(".slots__view").$("[data-id='" + product.getItemInComboId() + "']").
                 find(byText("Изменить состав")).click();
         Integer surcharge = 0;
-        for(AdditiveItem topping : product.getAdditiveItems()) {
+        for (AdditiveItem topping : product.getAdditiveItems()) {
             toppingsArea.$("[alt='" + topping.getItemName() + "']").click();
             surcharge += topping.getItemSurcharge();
         }

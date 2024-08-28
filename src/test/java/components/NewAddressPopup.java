@@ -18,7 +18,7 @@ public class NewAddressPopup {
     static final SelenideElement commentInput = $("[name='comment']");
     static final SelenideElement addAddressButton = $("[data-testid='add_or_save_spinner_button']");
 
-    public void enterNewAddress (DeliveryAddress address) {
+    public void enterNewAddress(DeliveryAddress address) {
         addressInput.click();
         addressInput.setValue(address.getAddress());
         firstAddressSuggestion.shouldBe(visible, Duration.ofSeconds(10));

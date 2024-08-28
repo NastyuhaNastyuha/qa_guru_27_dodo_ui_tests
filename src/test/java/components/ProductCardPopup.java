@@ -24,7 +24,7 @@ public class ProductCardPopup {
     }
 
     public void removeBaseIngredientsFromPizza(PizzaItem pizza) {
-        for(AdditiveItem ingredient : pizza.getExcludedItems()) {
+        for (AdditiveItem ingredient : pizza.getExcludedItems()) {
             pizzaModifyingArea.find(withText("тесто")).parent().sibling(0)
                     .find(withTextCaseInsensitive(ingredient.getItemName())).click();
 

@@ -8,7 +8,6 @@
       "itemSurcharge": "",
       "itemInComboId": "",
       "itemOrderInCombo": "1",
-      "itemWeight": "",
       "additiveItems": []
     },
     {
@@ -17,7 +16,6 @@
       "itemSurcharge": "",
       "itemInComboId": "",
       "itemOrderInCombo": "2",
-      "itemWeight": "",
       "additiveItems": []
     },
     {
@@ -26,7 +24,6 @@
       "itemSurcharge": "",
       "itemInComboId": "",
       "itemOrderInCombo": "3",
-      "itemWeight": "",
       "additiveItems": []
     },
     {
@@ -35,7 +32,6 @@
       "itemSurcharge": "",
       "itemInComboId": "",
       "itemOrderInCombo": "4",
-      "itemWeight": "",
       "additiveItems": []
     }
   ]

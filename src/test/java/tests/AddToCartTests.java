@@ -28,11 +28,11 @@ public class AddToCartTests extends TestBase {
     ClassLoader classLoader = AddToCartTests.class.getClassLoader();
 
     @DisplayName("Простой товар можно добавить в корзину. " +
-            "Способ получения -- забрать из пиццерии")
+            "Способ получения - забрать из пиццерии")
     @Test
     @Owner("rybinaa")
     @Severity(SeverityLevel.CRITICAL)
-    void simpleItemShouldBeAddedToCart() throws Exception{
+    void simpleItemShouldBeAddedToCart() throws Exception {
         try (InputStream inputStreamForAddress = classLoader
                 .getResourceAsStream("testData/pickupAddress.json")) {
             ObjectMapper mapperForAddress = new ObjectMapper();
@@ -68,17 +68,16 @@ public class AddToCartTests extends TestBase {
                 step("Проверить, что товар добавлен в корзину", () -> {
                     mainPage.checkThatItemInCart_test(simpleItem);
                 });
-
             }
         }
     }
 
     @DisplayName("Простой товар можно добавить в корзину  с главной страницы. " +
-            "Способ получения -- забрать из пиццерии")
+            "Способ получения - забрать из пиццерии")
     @Test
     @Owner("rybinaa")
     @Severity(SeverityLevel.NORMAL)
-    void simpleItemShouldBeAddedToCartFromMainPage() throws Exception{
+    void simpleItemShouldBeAddedToCartFromMainPage() throws Exception {
         try (InputStream inputStreamForAddress = classLoader
                 .getResourceAsStream("testData/pickupAddress.json")) {
             ObjectMapper mapperForAddress = new ObjectMapper();
@@ -92,40 +91,35 @@ public class AddToCartTests extends TestBase {
                 step("Открыть страницу", () -> {
                     mainPage.openPage();
                 });
-
                 step("Выбрать город", () -> {
                     mainPage.selectCity(address.getCity())
                             .closeCookiePolicy();
                 });
-
                 step("Добавить простой товар в корзину", () -> {
-                    //mainPage.addSimpleOftenOrderedItemToCart(simpleItem);
                     mainPage.addProductToCartFromMainPage(simpleItem);
                 });
                 step("Выбрать способ доставки", () -> {
                     mainPage.chooseDeliveryMethod(PICKUP);
                 });
                 step("Выбрать адрес самовывоза", () -> {
-//                    mainPage.choosePickupAddress(address);
                     mainPage.choosePickupAddress(address);
                 });
                 step("Открыть корзину", () -> {
                     mainPage.openCart();
                 });
-
                 step("Проверить, что товар добавлен в корзину", () -> {
                     mainPage.checkThatItemInCart_test(simpleItem);
                 });
             }
-            }
+        }
     }
 
     @DisplayName("Пиццу с дефолтными модификаторами можно добавить в корзину с главной страницы. " +
-            "Способ получения -- доставка")
+            "Способ получения - доставка")
     @Test
     @Owner("rybinaa")
     @Severity(SeverityLevel.NORMAL)
-    void pizzaWithDefaultModifiersShouldBeAddedToCart() throws Exception{
+    void pizzaWithDefaultModifiersShouldBeAddedToCart() throws Exception {
         try (InputStream inputStreamForAddress = classLoader
                 .getResourceAsStream("testData/deliveryAddressWithAllFieldsAreFilled.json")) {
             ObjectMapper mapperForAddress = new ObjectMapper();
@@ -171,7 +165,7 @@ public class AddToCartTests extends TestBase {
     }
 
     @DisplayName("Пиццу с модификаторами можно добавить в корзину с главной страницы. " +
-            "Способ получения -- доставка")
+            "Способ получения - доставка")
     @Test
     @Owner("rybinaa")
     @Severity(SeverityLevel.NORMAL)
@@ -189,30 +183,22 @@ public class AddToCartTests extends TestBase {
                 step("Открыть страницу", () -> {
                     mainPage.openPage();
                 });
-
                 step("Выбрать город", () -> {
                     mainPage.selectCity(address.getCity())
                             .closeCookiePolicy();
                 });
-
-
                 step("Открыть карточку товара", () -> {
                     mainPage.openProductCardInCategory(pizzaItem.getPizzaName(), PIZZA);
-
                 });
-
                 step("Выбрать тесто и размер пиццы", () -> {
                     mainPage.changePizzaDoughAndSize(pizzaItem);
                 });
-
                 step("Исключить базовые ингредиенты из пиццы", () -> {
                     mainPage.removeBaseIngredientsFromPizza(pizzaItem);
                 });
-
                 step("Добавить дополнительные ингредиенты в пиццу", () -> {
                     mainPage.addIngredientsToPizza(pizzaItem);
                 });
-
                 step("Добавить пиццу в корзину", () -> {
                     mainPage.addProductToCartFromPopup();
                 });
@@ -225,7 +211,6 @@ public class AddToCartTests extends TestBase {
                 step("Открыть корзину", () -> {
                     mainPage.openCart();
                 });
-
                 step("Проверить, что пицца добавлена в корзину", () -> {
                     mainPage.checkThatPizzaItemInCart_test(pizzaItem);
                 });
@@ -234,7 +219,7 @@ public class AddToCartTests extends TestBase {
     }
 
     @DisplayName("Комбо товар с дефолтными продуктами можно добавить в корзину с главной страницы. " +
-            "Способ получения -- самовывоз")
+            "Способ получения - самовывоз")
     @Test
     @Owner("rybinaa")
     @Severity(SeverityLevel.NORMAL)
@@ -249,22 +234,22 @@ public class AddToCartTests extends TestBase {
                 ObjectMapper mapper = new ObjectMapper();
                 ComboItem comboItem = mapper.readValue(inputStream, ComboItem.class);
 
-                    step("Открыть страницу", () -> {
-                        mainPage.openPage();
-                    });
+                step("Открыть страницу", () -> {
+                    mainPage.openPage();
+                });
 
-                    step("Выбрать город", () -> {
-                        mainPage.selectCity(address.getCity())
-                                .closeCookiePolicy();
-                    });
+                step("Выбрать город", () -> {
+                    mainPage.selectCity(address.getCity())
+                            .closeCookiePolicy();
+                });
 
-                    step("Открыть карточку комбо-товара", () -> {
-                        mainPage.openProductCard(comboItem.getComboName());
-                    });
+                step("Открыть карточку комбо-товара", () -> {
+                    mainPage.openProductCard(comboItem.getComboName());
+                });
 
-                    step("Добавить комбо-товар в корзину", () -> {
-                        mainPage.addComboToCartFromPopup();
-                    });
+                step("Добавить комбо-товар в корзину", () -> {
+                    mainPage.addComboToCartFromPopup();
+                });
 
                 step("Выбрать способ доставки", () -> {
                     mainPage.chooseDeliveryMethod(PICKUP);
@@ -273,19 +258,19 @@ public class AddToCartTests extends TestBase {
                     mainPage.choosePickupAddress(address);
                 });
 
-                    step("Открыть корзину", () -> {
-                        mainPage.openCart();
-                    });
+                step("Открыть корзину", () -> {
+                    mainPage.openCart();
+                });
 
-                    step("Проверить, что комбо-товар добавлен в корзину", () -> {
-                        mainPage.checkThatComboItemInCart_test(comboItem);
-                    });
-                }
+                step("Проверить, что комбо-товар добавлен в корзину", () -> {
+                    mainPage.checkThatComboItemInCart_test(comboItem);
+                });
             }
         }
+    }
 
     @DisplayName("Комбо товар с измененными продуктами можно добавить в корзину с главной страницы. " +
-            "Способ получения -- доставка")
+            "Способ получения - доставка")
     @Test
     @Owner("rybinaa")
     @Severity(SeverityLevel.NORMAL)
@@ -303,43 +288,34 @@ public class AddToCartTests extends TestBase {
                 step("Открыть страницу", () -> {
                     mainPage.openPage();
                 });
-
                 step("Выбрать город", () -> {
                     mainPage.selectCity(address.getCity())
                             .closeCookiePolicy();
                 });
-
                 step("Открыть карточку комбо-товара", () -> {
                     mainPage.openProductCardInCategory(comboItem.getComboName(), COMBO);
                 });
-
                 step("Заменить второй товар в комбо", () -> {
                     mainPage.replaceItemInComboWithOrder(comboItem, 2);
                 });
-
                 step("Заменить третий товар в комбо", () -> {
                     mainPage.replaceItemInComboWithOrder(comboItem, 3);
                 });
-
                 step("Изменить состав четвертого товара в комбо", () -> {
                     mainPage.changeItemIngredientsInCombo(comboItem, 4);
                 });
-
                 step("Добавить комбо-товар в корзину", () -> {
                     mainPage.addComboToCartFromPopup();
                 });
-
                 step("Выбрать способ доставки", () -> {
                     mainPage.chooseDeliveryMethod(DELIVERY);
                 });
                 step("Ввести адрес доставки", () -> {
                     mainPage.enterDeliveryAddress(address);
                 });
-
                 step("Открыть корзину", () -> {
                     mainPage.openCart();
                 });
-
                 step("Проверить, что комбо-товар добавлен в корзину", () -> {
                     mainPage.checkThatComboItemInCart_test(comboItem);
                 });
