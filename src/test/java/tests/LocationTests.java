@@ -23,7 +23,7 @@ import static components.DeliveryMethods.DELIVERY;
 import static components.DeliveryMethods.PICKUP;
 import static io.qameta.allure.Allure.step;
 
-public class LocationTests {
+public class LocationTests extends TestBase{
 
     MainPage mainPage = new MainPage();
     ClassLoader classLoader = AddToCartTests.class.getClassLoader();
