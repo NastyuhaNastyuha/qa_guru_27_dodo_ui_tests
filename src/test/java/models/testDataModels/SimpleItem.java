@@ -12,6 +12,5 @@ public class SimpleItem {
     String itemId;
     String itemInComboId;
     Integer itemOrderInCombo;
-    String itemWeight;
     ArrayList<AdditiveItem> additiveItems;
 }

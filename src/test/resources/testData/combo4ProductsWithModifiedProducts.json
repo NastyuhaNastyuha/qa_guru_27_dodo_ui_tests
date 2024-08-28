@@ -8,7 +8,6 @@
       "itemSurcharge": "",
       "itemInComboId": "11edd2e1988fadbb083d22aa7091a0a0",
       "itemOrderInCombo": "1",
-      "itemWeight": "",
       "additiveItems": []
     },
     {
@@ -17,7 +16,6 @@
       "itemSurcharge": "0",
       "itemInComboId": "11ed6428b0626f2f040d14b3c2780b70",
       "itemOrderInCombo": "2",
-      "itemWeight": "",
       "additiveItems": []
     },
     {
@@ -26,7 +24,6 @@
       "itemSurcharge": "0",
       "itemInComboId": "11ef080abe20b9a775549b17d7431e50",
       "itemOrderInCombo": "3",
-      "itemWeight": "",
       "additiveItems": []
     },
     {
@@ -35,7 +32,6 @@
       "itemSurcharge": "",
       "itemInComboId": "11ef080abe20b9a775549b17bdd4a6a0",
       "itemOrderInCombo": "4",
-      "itemWeight": "",
       "additiveItems": [
         {
           "itemName": "Сироп со вкусом фундука",

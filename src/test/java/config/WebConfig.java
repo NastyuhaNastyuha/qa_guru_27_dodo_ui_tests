@@ -2,6 +2,8 @@ package config;
 
 import org.aeonbits.owner.Config;
 
+import static com.codeborne.selenide.Browsers.CHROME;
+
 @Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
         "system:properties",
@@ -9,10 +11,9 @@ import org.aeonbits.owner.Config;
         "file:~/${env}.properties",
         "file:./${env}.properties"
 })
-
 public interface WebConfig extends Config {
 
-    @DefaultValue("CHROME")
+    @DefaultValue(CHROME)
     Browser browser();
 
     @DefaultValue("126.0.6478.127")

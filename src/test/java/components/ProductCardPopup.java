@@ -10,9 +10,8 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class ProductCardPopup {
-    static final SelenideElement addProductToCartButton = $("[data-testid='button_add_to_cart']");
-    static final SelenideElement pizzaModifyingArea = $(".scroll__view");
-
+    private final SelenideElement addProductToCartButton = $("[data-testid='button_add_to_cart']");
+    private final SelenideElement pizzaModifyingArea = $(".scroll__view");
 
     public void addProductToCard() {
         addProductToCartButton.click();
@@ -25,7 +24,7 @@ public class ProductCardPopup {
     }
 
     public void removeBaseIngredientsFromPizza(PizzaItem pizza) {
-        for(AdditiveItem ingredient : pizza.getExcludedItems()) {
+        for (AdditiveItem ingredient : pizza.getExcludedItems()) {
             pizzaModifyingArea.find(withText("тесто")).parent().sibling(0)
                     .find(withTextCaseInsensitive(ingredient.getItemName())).click();
 

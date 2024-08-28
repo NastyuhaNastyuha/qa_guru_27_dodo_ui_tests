@@ -9,7 +9,6 @@ public enum ProductCategory {
     private final String name;
     private final String selector;
 
-
     ProductCategory(String name, String selector) {
         this.name = name;
         this.selector = selector;

@@ -11,7 +11,6 @@ public enum PizzaSize {
     private final String selector;
     private final String size;
 
-
     PizzaSize(String name, String selector, String size) {
         this.name = name;
         this.selector = selector;

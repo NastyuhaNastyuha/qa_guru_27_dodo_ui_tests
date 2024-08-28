@@ -8,9 +8,6 @@ repositories {
     mavenCentral()
 }
 
-def restAssuredVersion = "5.4.0",
-    allureVersion = "2.21.0"
-
 allure {
     report {
         version.set("2.27.0")
@@ -31,7 +28,6 @@ dependencies {
             "com.codeborne:selenide:7.4.1",
             "org.junit.jupiter:junit-jupiter:5.10.3",
             "org.slf4j:slf4j-simple:2.0.13",
-            "com.github.javafaker:javafaker:1.0.2",
             "io.qameta.allure:allure-selenide:2.28.1",
             "io.github.bonigarcia:webdrivermanager:5.9.2",
             "org.assertj:assertj-core:3.26.3",
