@@ -9,14 +9,14 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class NewAddressPopup {
-    static final SelenideElement addressInput = $("[data-testid='delivery_placeholder_on_input_street']");
-    static final SelenideElement firstAddressSuggestion = $("[data-testid='two-line-list']").$("li");
-    static final SelenideElement entranceInput = $("[name='porch']");
-    static final SelenideElement doorCodeInput = $("[name='doorCode']");
-    static final SelenideElement floorInput = $("[name='floor']");
-    static final SelenideElement apartmentInput = $("[name='apartment']");
-    static final SelenideElement commentInput = $("[name='comment']");
-    static final SelenideElement addAddressButton = $("[data-testid='add_or_save_spinner_button']");
+    private final SelenideElement addressInput = $("[data-testid='delivery_placeholder_on_input_street']");
+    private final SelenideElement firstAddressSuggestion = $("[data-testid='two-line-list']").$("li");
+    private final SelenideElement entranceInput = $("[name='porch']");
+    private final SelenideElement doorCodeInput = $("[name='doorCode']");
+    private final SelenideElement floorInput = $("[name='floor']");
+    private final SelenideElement apartmentInput = $("[name='apartment']");
+    private final SelenideElement commentInput = $("[name='comment']");
+    private final SelenideElement addAddressButton = $("[data-testid='add_or_save_spinner_button']");
 
     public void enterNewAddress(DeliveryAddress address) {
         addressInput.click();

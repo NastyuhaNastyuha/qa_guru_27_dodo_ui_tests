@@ -8,10 +8,10 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
 public class ComboCardPopup {
-    static final SelenideElement addComboToCartButton = $("button.add-button");
-    static final SelenideElement productsForReplaceArea = $(".product-selector-scroll__view");
-    static final SelenideElement toppingsArea = $(".toppings");
-    static final SelenideElement toppingsSaveButton = $("button.save-button");
+    private final SelenideElement addComboToCartButton = $("button.add-button");
+    private final SelenideElement productsForReplaceArea = $(".product-selector-scroll__view");
+    private final SelenideElement toppingsArea = $(".toppings");
+    private final SelenideElement toppingsSaveButton = $("button.save-button");
 
 
     public void addComboToCart() {

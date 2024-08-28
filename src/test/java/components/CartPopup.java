@@ -15,8 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartPopup {
 
-    static final SelenideElement cartArea = $(".scroll__view");
-
+    private final SelenideElement cartArea = $(".scroll__view");
 
     public void checkThatComboItemInCart_test(ComboItem comboItem) {
         step("Проверить заголовок комбо-товара", () -> {

@@ -10,8 +10,8 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class ProductCardPopup {
-    static final SelenideElement addProductToCartButton = $("[data-testid='button_add_to_cart']");
-    static final SelenideElement pizzaModifyingArea = $(".scroll__view");
+    private final SelenideElement addProductToCartButton = $("[data-testid='button_add_to_cart']");
+    private final SelenideElement pizzaModifyingArea = $(".scroll__view");
 
     public void addProductToCard() {
         addProductToCartButton.click();

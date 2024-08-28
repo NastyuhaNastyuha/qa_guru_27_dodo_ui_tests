@@ -17,18 +17,17 @@ public class MainPage {
     NewAddressPopup newAddressPopup = new NewAddressPopup();
     PizzeriasPopUp pizzeriasPopUp = new PizzeriasPopUp();
 
-    static final SelenideElement allProductsSection = $("main");
-    static final SelenideElement cityButton = $("[data-testid='header__about-slogan-text_link']");
-    static final SelenideElement cartButton = $("[data-testid='navigation__cart']");
-    static final SelenideElement closeCookiePolicyToastify = $(".cookie-policy-button");
-    static final SelenideElement itemsInCartCounter = $("[data-testid='cart-button__quantity']");
+    private final SelenideElement allProductsSection = $("main");
+    private final SelenideElement cityButton = $("[data-testid='header__about-slogan-text_link']");
+    private final SelenideElement cartButton = $("[data-testid='navigation__cart']");
+    private final SelenideElement closeCookiePolicyToastify = $(".cookie-policy-button");
+    private final SelenideElement itemsInCartCounter = $("[data-testid='cart-button__quantity']");
+    private final SelenideElement menu = $("nav");
 
     public MainPage openPage() {
         open("");
         return this;
     }
-
-    static final SelenideElement menu = $("nav");
 
     public MainPage closeCookiePolicy() {
         closeCookiePolicyToastify.click();
