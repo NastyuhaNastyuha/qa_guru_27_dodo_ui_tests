@@ -3,8 +3,6 @@ package tests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import config.AuthConfig;
-//import config.ConfigReader;
-//import config.ProjectConfiguration;
 import config.WebConfig;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -19,12 +17,8 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class TestBase {
 
-    //private static final WebConfig APPLY_WEB_CONFIG = ConfigReader.Instance.read();
-
     @BeforeAll
     static void setUp() {
-//        ProjectConfiguration projectConfiguration = new ProjectConfiguration(APPLY_WEB_CONFIG);
-//        projectConfiguration.webConfig();
 
         AuthConfig authConfig = ConfigFactory.create(AuthConfig.class, System.getProperties());
         WebConfig webConfig = ConfigFactory.create(WebConfig.class, System.getProperties());
@@ -44,12 +38,6 @@ public class TestBase {
             ));
             Configuration.browserCapabilities = capabilities;
         }
-//        DesiredCapabilities capabilities = new DesiredCapabilities();
-//        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-//                "enableVNC", true,
-//                "enableVideo", true
-//        ));
-//        Configuration.browserCapabilities = capabilities;
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }

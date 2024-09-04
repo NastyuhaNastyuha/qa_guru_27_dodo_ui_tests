@@ -2,14 +2,8 @@ package config;
 
 import org.aeonbits.owner.Config;
 
-import static com.codeborne.selenide.Browsers.CHROME;
-
-//@Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
-        //"system:properties",
         "classpath:${env}.properties"
-//        "file:~/${env}.properties",
-//        "file:./${env}.properties"
 })
 public interface WebConfig extends Config {
 
@@ -32,8 +26,6 @@ public interface WebConfig extends Config {
     @Key("isRemote")
     @DefaultValue("false")
     boolean isRemote();
-
-    //String remoteUrl();
 
     @Key("pageLoadStrategy")
     @DefaultValue("eager")
