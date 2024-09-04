@@ -1,4 +1,4 @@
-package models.testDataModels;
+package models;
 
 import lombok.Data;
 
@@ -7,6 +7,6 @@ import java.util.ArrayList;
 @Data
 public class ComboItem {
     String comboName;
-    Integer comboPrice;
+    int comboPrice;
     ArrayList<SimpleItem> products;
 }

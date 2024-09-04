@@ -1,7 +1,7 @@
-package components;
+package pages.components;
 
 import com.codeborne.selenide.SelenideElement;
-import models.testDataModels.PickupAddress;
+import models.PickupAddress;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;

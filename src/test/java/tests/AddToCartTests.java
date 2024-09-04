@@ -6,18 +6,19 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+import models.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.MainPage;
-import models.testDataModels.*;
+import pages.components.*;
 
 import java.io.InputStream;
 
-import static components.DeliveryMethods.DELIVERY;
-import static components.DeliveryMethods.PICKUP;
+import static data.DeliveryMethodsEnum.DELIVERY;
+import static data.DeliveryMethodsEnum.PICKUP;
 import static io.qameta.allure.Allure.*;
-import static models.testDataModels.ProductCategory.COMBO;
-import static models.testDataModels.ProductCategory.PIZZA;
+import static data.ProductCategoryEnum.COMBO;
+import static data.ProductCategoryEnum.PIZZA;
 
 @Story("Создание заказа")
 @Feature("Добавление товара в корзину")
@@ -26,6 +27,10 @@ public class AddToCartTests extends TestBase {
 
     MainPage mainPage = new MainPage();
     ClassLoader classLoader = AddToCartTests.class.getClassLoader();
+    CartPopupCommon cartPopupCommon = new CartPopupCommon();
+    ProductCardPopup productCardPopup = new ProductCardPopup();
+    NewAddressPopup newAddressPopup = new NewAddressPopup();
+    PizzeriasPopUp pizzeriasPopUp = new PizzeriasPopUp();
 
     @DisplayName("Простой товар можно добавить в корзину. " +
             "Способ получения - забрать из пиццерии")
@@ -33,6 +38,8 @@ public class AddToCartTests extends TestBase {
     @Owner("rybinaa")
     @Severity(SeverityLevel.CRITICAL)
     void simpleItemShouldBeAddedToCart() throws Exception {
+        //TODO: убрать куда-нибудь, чтобы не в коде теста определялась переменная
+        String city = "omsk";
         try (InputStream inputStreamForAddress = classLoader
                 .getResourceAsStream("testData/pickupAddress.json")) {
             ObjectMapper mapperForAddress = new ObjectMapper();
@@ -44,29 +51,35 @@ public class AddToCartTests extends TestBase {
                 SimpleItem simpleItem = mapper.readValue(inputStream, SimpleItem.class);
 
                 step("Открыть страницу", () -> {
-                    mainPage.openPage();
-                });
-                step("Выбрать город", () -> {
-                    mainPage.selectCity(address.getCity())
+                    //mainPage.openPage();
+                    mainPage.openPageWithSelectedCity(city)
                             .closeCookiePolicy();
                 });
+//                step("Выбрать город", () -> {
+//                    mainPage.selectCity(address.getCity())
+//                            .closeCookiePolicy();
+//                });
                 step("Открыть карточку товара", () -> {
                     mainPage.openProductCard(simpleItem.getItemName());
                 });
                 step("Добавить простой товар в корзину", () -> {
-                    mainPage.addProductToCartFromPopup();
+                    //mainPage.addProductToCartFromPopup();
+                    productCardPopup.addProductToCard();
                 });
                 step("Выбрать способ доставки", () -> {
                     mainPage.chooseDeliveryMethod(PICKUP);
                 });
                 step("Выбрать адрес самовывоза", () -> {
-                    mainPage.choosePickupAddress(address);
+                    pizzeriasPopUp.choosePickupAddress(address);
+                    //mainPage.choosePickupAddress(address);
                 });
                 step("Открыть корзину", () -> {
                     mainPage.openCart();
                 });
                 step("Проверить, что товар добавлен в корзину", () -> {
-                    mainPage.checkThatItemInCart_test(simpleItem);
+                    cartPopupCommon.checkItemName(simpleItem.getItemName())
+                            .checkItemPrice(simpleItem.getItemName(), simpleItem.getItemPrice());
+                    //mainPage.checkThatItemInCart_test(simpleItem);
                 });
             }
         }

@@ -1,8 +1,10 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
-import components.*;
-import models.testDataModels.*;
+import data.DeliveryMethodsEnum;
+import data.ProductCategoryEnum;
+import models.*;
+import pages.components.*;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
@@ -40,10 +42,10 @@ public class MainPage {
         return this;
     }
 
-    public MainPage chooseDeliveryMethod(DeliveryMethods deliveryMethod) {
-        if (deliveryMethod == DeliveryMethods.PICKUP) {
+    public MainPage chooseDeliveryMethod(DeliveryMethodsEnum deliveryMethod) {
+        if (deliveryMethod == DeliveryMethodsEnum.PICKUP) {
             deliveryMethodPopUp.choosePickup();
-        } else if (deliveryMethod == DeliveryMethods.DELIVERY) {
+        } else if (deliveryMethod == DeliveryMethodsEnum.DELIVERY) {
             deliveryMethodPopUp.chooseDelivery();
         }
         return this;
@@ -54,7 +56,7 @@ public class MainPage {
         return this;
     }
 
-    public MainPage openProductCardInCategory(String productName, ProductCategory category) throws InterruptedException {
+    public MainPage openProductCardInCategory(String productName, ProductCategoryEnum category) throws InterruptedException {
         menu.$$("li").findBy(text(category.getName())).click();
         Thread.sleep(1000);
         $(category.getSelector()).find(byText(productName)).shouldBe(visible);
@@ -74,7 +76,7 @@ public class MainPage {
     }
 
     public MainPage changePizzaDoughAndSize(PizzaItem pizza) {
-        productCardPopup.changePizzaDoughAndSize(pizza);
+        productCardPopup.selectPizzaDoughAndSize(pizza);
         return this;
     }
 
@@ -93,21 +95,20 @@ public class MainPage {
         return this;
     }
 
-    public MainPage replaceItemInComboWithOrder(ComboItem comboItem, Integer order) {
+    public MainPage replaceItemInComboWithOrder(ComboItem comboItem, int order) {
         for (SimpleItem product : comboItem.getProducts()) {
             if (product.getItemOrderInCombo() == order) {
-                Integer price = comboItem.getComboPrice() + comboCardPopup.replaceSimpleItemInCombo(product);
+                int price = comboItem.getComboPrice() + comboCardPopup.replaceSimpleItemInCombo(product);
                 comboItem.setComboPrice(price);
             }
         }
         return this;
     }
 
-    public MainPage changeItemIngredientsInCombo(ComboItem comboItem, Integer order) {
-
+    public MainPage changeItemIngredientsInCombo(ComboItem comboItem, int order) {
         for (SimpleItem product : comboItem.getProducts()) {
             if (product.getItemOrderInCombo() == order) {
-                Integer price = comboItem.getComboPrice() + comboCardPopup.changeItemIngredientsInCombo(product);
+                int price = comboItem.getComboPrice() + comboCardPopup.changeItemIngredientsInCombo(product);
                 comboItem.setComboPrice(price);
             }
         }
@@ -131,17 +132,17 @@ public class MainPage {
     }
 
     public MainPage checkThatComboItemInCart_test(ComboItem comboItem) {
-        cartPopupComponent.checkThatComboItemInCart_test(comboItem);
+        cartPopupComponent.checkThatComboItemInCart(comboItem);
         return this;
     }
 
     public MainPage checkThatPizzaItemInCart_test(PizzaItem pizzaItem) {
-        cartPopupComponent.checkThatPizzaItemInCart_test(pizzaItem);
+        cartPopupComponent.checkThatPizzaItemInCart(pizzaItem);
         return this;
     }
 
     public MainPage checkThatItemInCart_test(SimpleItem simpleItem) {
-        cartPopupComponent.checkThatItemInCart_test(simpleItem);
+        cartPopupComponent.checkThatItemInCart(simpleItem);
         return this;
     }
 
@@ -167,6 +168,11 @@ public class MainPage {
 
     public MainPage openSelectCityPopup() {
         cityButton.click();
+        return this;
+    }
+
+    public MainPage openPageWithSelectedCity(String city) {
+        open("/" + city);
         return this;
     }
 }

@@ -1,5 +1,6 @@
-package models.testDataModels;
+package models;
 
+import data.PizzaSizeEnum;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -8,9 +9,8 @@ import java.util.ArrayList;
 public class PizzaItem {
     String pizzaName;
     Integer pizzaPrice;
-    PizzaSize pizzaSize;
+    PizzaSizeEnum pizzaSizeEnum;
     String dough;
     ArrayList<AdditiveItem>  additiveItems;
     ArrayList<AdditiveItem>  excludedItems;
-
 }

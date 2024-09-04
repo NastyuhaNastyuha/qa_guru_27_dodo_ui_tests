@@ -1,15 +1,15 @@
-package models.testDataModels;
+package data;
 
 import lombok.Getter;
 
 @Getter
-public enum ProductCategory {
+public enum ProductCategoryEnum {
     PIZZA("Пиццы", "#guzhy"),
     COMBO("Комбо", "#nfjka");
     private final String name;
     private final String selector;
 
-    ProductCategory(String name, String selector) {
+    ProductCategoryEnum(String name, String selector) {
         this.name = name;
         this.selector = selector;
     }

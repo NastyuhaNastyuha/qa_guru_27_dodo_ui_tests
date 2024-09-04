@@ -1,9 +1,9 @@
-package components;
+package pages.components;
 
 import com.codeborne.selenide.SelenideElement;
-import models.testDataModels.AdditiveItem;
-import models.testDataModels.PizzaItem;
-import models.testDataModels.PizzaSize;
+import models.AdditiveItem;
+import models.PizzaItem;
+import data.PizzaSizeEnum;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.*;
@@ -17,10 +17,10 @@ public class ProductCardPopup {
         addProductToCartButton.click();
     }
 
-    public void changePizzaDoughAndSize(PizzaItem pizza) {
-        PizzaSize pizzaSize = pizza.getPizzaSize();
+    public void selectPizzaDoughAndSize(PizzaItem pizza) {
+        PizzaSizeEnum pizzaSizeEnum = pizza.getPizzaSizeEnum();
         pizzaModifyingArea.find(byText(pizza.getDough())).click();
-        $(pizzaSize.getSelector()).click();
+        $(pizzaSizeEnum.getSelector()).click();
     }
 
     public void removeBaseIngredientsFromPizza(PizzaItem pizza) {

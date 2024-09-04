@@ -1,8 +1,8 @@
-package components;
+package pages.components;
 
 import com.codeborne.selenide.SelenideElement;
-import models.testDataModels.AdditiveItem;
-import models.testDataModels.SimpleItem;
+import models.AdditiveItem;
+import models.SimpleItem;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;

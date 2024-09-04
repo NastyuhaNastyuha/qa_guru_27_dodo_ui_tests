@@ -1,7 +1,7 @@
-package components;
+package pages.components;
 
 import com.codeborne.selenide.SelenideElement;
-import models.testDataModels.DeliveryAddress;
+import models.DeliveryAddress;
 
 import java.time.Duration;
 

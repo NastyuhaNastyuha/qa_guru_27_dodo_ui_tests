@@ -6,8 +6,8 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
-import models.testDataModels.DeliveryAddress;
-import models.testDataModels.SimpleItem;
+import models.DeliveryAddress;
+import models.SimpleItem;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,8 +17,8 @@ import pages.MainPage;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static components.DeliveryMethods.DELIVERY;
-import static components.DeliveryMethods.PICKUP;
+import static data.DeliveryMethodsEnum.DELIVERY;
+import static data.DeliveryMethodsEnum.PICKUP;
 import static io.qameta.allure.Allure.step;
 
 @Story("Создание заказа")
