@@ -4,12 +4,12 @@ import org.aeonbits.owner.Config;
 
 import static com.codeborne.selenide.Browsers.CHROME;
 
-@Config.LoadPolicy(Config.LoadType.MERGE)
+//@Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
-        "system:properties",
-        "classpath:${env}.properties",
-        "file:~/${env}.properties",
-        "file:./${env}.properties"
+        //"system:properties",
+        "classpath:${env}.properties"
+//        "file:~/${env}.properties",
+//        "file:./${env}.properties"
 })
 public interface WebConfig extends Config {
 
