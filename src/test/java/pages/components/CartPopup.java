@@ -60,7 +60,7 @@ public class CartPopup {
 
         step("Проверить, что добавлен верный размер пиццы", () -> {
             productCardsInCart.findBy(text(pizzaItem.getPizzaName())).closest("section")
-                    .shouldHave(text(pizzaItem.getPizzaSizeEnum().getSize()));
+                    .shouldHave(text(pizzaItem.getPizzaSize().getSize()));
         });
 
         step("Проверить, что добавлено верное тесто для пиццы", () -> {

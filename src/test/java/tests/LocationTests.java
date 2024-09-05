@@ -1,6 +1,5 @@
 package tests;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
@@ -9,13 +8,9 @@ import io.qameta.allure.Story;
 import models.DeliveryAddress;
 import models.SimpleItem;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import pages.MainPage;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 import static data.DeliveryMethodsEnum.DELIVERY;
 import static data.DeliveryMethodsEnum.PICKUP;
@@ -35,8 +30,6 @@ public class LocationTests extends TestBase {
     @ParameterizedTest(name = "Можно поменять город")
     @DisplayName("Можно поменять город")
     void chooseCityTest(String firstCity, String secondCity) throws Exception {
-//        String firstCity = "Воронеж";
-//        String secondCity = "Дубна";
         SimpleItem simpleItem = SimpleItem.createSimpleItemFromJsonFile("testData/simpleDefaultProduct.json");
 
             step("Открыть страницу", () -> {
@@ -83,16 +76,8 @@ public class LocationTests extends TestBase {
     @CsvFileSource(resources = "/testData/deliveryAddresses.csv")
     @ParameterizedTest(name = "Можно ввести адрес доставки с заполнением полей: {0}")
     @DisplayName("Проверка заполнения адреса доставки")
-    void enterDeliveryAddressTest(String testName, String city, String address, String entrance, String doorCode,
-                                  String floor, String apartment, String comment) throws Exception {
-        DeliveryAddress deliveryAddress = new DeliveryAddress();
-        deliveryAddress.setCity(city);
-        deliveryAddress.setAddress(address);
-        deliveryAddress.setEntrance(entrance);
-        deliveryAddress.setDoorCode(doorCode);
-        deliveryAddress.setFloor(floor);
-        deliveryAddress.setApartment(apartment);
-        deliveryAddress.setComment(comment);
+    void enterDeliveryAddressTest (String testName, String filePath) throws Exception {
+        DeliveryAddress address = DeliveryAddress.createDeliveryAddressFromJsonFile(filePath);
 
         SimpleItem simpleItem = SimpleItem.createSimpleItemFromJsonFile("testData/simpleDefaultProduct.json");
 
@@ -100,7 +85,7 @@ public class LocationTests extends TestBase {
                 mainPage.openPage();
             });
             step("Выбрать город", () -> {
-                mainPage.selectCity(deliveryAddress.getCity())
+                mainPage.selectCity(address.getCity())
                         .closeCookiePolicy();
             });
             step("Добавить простой товар в корзину", () -> {
@@ -110,7 +95,7 @@ public class LocationTests extends TestBase {
                 mainPage.chooseDeliveryMethod(DELIVERY);
             });
             step("Ввести адрес доставки", () -> {
-                mainPage.enterDeliveryAddress(deliveryAddress);
+                mainPage.enterDeliveryAddress(address);
             });
             step("Проверить, что корзина не пуста", () -> {
                 mainPage.checkThatItemsInCartCounterNotEmpty();

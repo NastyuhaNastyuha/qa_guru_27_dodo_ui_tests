@@ -18,7 +18,7 @@ public class ProductCardPopup {
     }
 
     public void selectPizzaDoughAndSize(PizzaItem pizza) {
-        PizzaSizeEnum pizzaSizeEnum = pizza.getPizzaSizeEnum();
+        PizzaSizeEnum pizzaSizeEnum = pizza.getPizzaSize();
         pizzaModifyingArea.find(byText(pizza.getDough())).click();
         $(pizzaSizeEnum.getSelector()).click();
     }

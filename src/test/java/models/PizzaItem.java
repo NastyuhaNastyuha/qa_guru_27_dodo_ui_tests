@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class PizzaItem {
     String pizzaName;
     Integer pizzaPrice;
-    PizzaSizeEnum pizzaSizeEnum;
+    PizzaSizeEnum pizzaSize;
     String dough;
     ArrayList<AdditiveItem>  additiveItems;
     ArrayList<AdditiveItem>  excludedItems;
