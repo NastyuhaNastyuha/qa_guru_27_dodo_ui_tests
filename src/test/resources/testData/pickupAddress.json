@@ -1,4 +1,5 @@
 {
   "city": "Омск",
-  "address": "Ленина, 17"
+  "address": "Ленина, 17",
+  "cityForUrl": "omsk"
 }

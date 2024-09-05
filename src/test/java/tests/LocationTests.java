@@ -31,16 +31,13 @@ public class LocationTests extends TestBase {
 
     @Severity(SeverityLevel.NORMAL)
     @Owner("rybinaa")
-    @Test
+    @CsvFileSource(resources = "/testData/twoCityForChange.csv")
+    @ParameterizedTest(name = "Можно поменять город")
     @DisplayName("Можно поменять город")
-    void chooseCityTest() throws Exception {
-        String firstCity = "Воронеж";
-        String secondCity = "Дубна";
-
-        try (InputStream inputStream = classLoader
-                .getResourceAsStream("testData/simpleDefaultProduct.json")) {
-            ObjectMapper mapper = new ObjectMapper();
-            SimpleItem simpleItem = mapper.readValue(inputStream, SimpleItem.class);
+    void chooseCityTest(String firstCity, String secondCity) throws Exception {
+//        String firstCity = "Воронеж";
+//        String secondCity = "Дубна";
+        SimpleItem simpleItem = SimpleItem.createSimpleItemFromJsonFile("testData/simpleDefaultProduct.json");
 
             step("Открыть страницу", () -> {
                 mainPage.openPage();
@@ -79,7 +76,6 @@ public class LocationTests extends TestBase {
             step("Проверить наличие выбранного города в адресе пиццерий", () -> {
                 mainPage.checkCityInPickupAddress(secondCity);
             });
-        }
     }
 
     @Severity(SeverityLevel.NORMAL)
@@ -88,7 +84,7 @@ public class LocationTests extends TestBase {
     @ParameterizedTest(name = "Можно ввести адрес доставки с заполнением полей: {0}")
     @DisplayName("Проверка заполнения адреса доставки")
     void enterDeliveryAddressTest(String testName, String city, String address, String entrance, String doorCode,
-                                  String floor, String apartment, String comment) throws IOException {
+                                  String floor, String apartment, String comment) throws Exception {
         DeliveryAddress deliveryAddress = new DeliveryAddress();
         deliveryAddress.setCity(city);
         deliveryAddress.setAddress(address);
@@ -98,10 +94,7 @@ public class LocationTests extends TestBase {
         deliveryAddress.setApartment(apartment);
         deliveryAddress.setComment(comment);
 
-        try (InputStream inputStream = classLoader
-                .getResourceAsStream("testData/simpleDefaultProduct.json")) {
-            ObjectMapper mapper = new ObjectMapper();
-            SimpleItem simpleItem = mapper.readValue(inputStream, SimpleItem.class);
+        SimpleItem simpleItem = SimpleItem.createSimpleItemFromJsonFile("testData/simpleDefaultProduct.json");
 
             step("Открыть страницу", () -> {
                 mainPage.openPage();
@@ -122,7 +115,5 @@ public class LocationTests extends TestBase {
             step("Проверить, что корзина не пуста", () -> {
                 mainPage.checkThatItemsInCartCounterNotEmpty();
             });
-
-        }
     }
 }

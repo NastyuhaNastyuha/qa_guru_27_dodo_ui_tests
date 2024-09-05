@@ -8,6 +8,7 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import models.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.MainPage;
 import pages.components.*;
@@ -38,32 +39,17 @@ public class AddToCartTests extends TestBase {
     @Owner("rybinaa")
     @Severity(SeverityLevel.CRITICAL)
     void simpleItemShouldBeAddedToCart() throws Exception {
-        //TODO: убрать куда-нибудь, чтобы не в коде теста определялась переменная
-        String city = "omsk";
-        try (InputStream inputStreamForAddress = classLoader
-                .getResourceAsStream("testData/pickupAddress.json")) {
-            ObjectMapper mapperForAddress = new ObjectMapper();
-            PickupAddress address = mapperForAddress.readValue(inputStreamForAddress, PickupAddress.class);
-
-            try (InputStream inputStream = classLoader
-                    .getResourceAsStream("testData/simpleDefaultProduct.json")) {
-                ObjectMapper mapper = new ObjectMapper();
-                SimpleItem simpleItem = mapper.readValue(inputStream, SimpleItem.class);
+        SimpleItem simpleItem = SimpleItem.createSimpleItemFromJsonFile("testData/simpleDefaultProduct.json");
+        PickupAddress address = PickupAddress.createPickupAddressFromJsonFile("testData/pickupAddress.json");
 
                 step("Открыть страницу", () -> {
-                    //mainPage.openPage();
-                    mainPage.openPageWithSelectedCity(city)
+                    mainPage.openPageWithSelectedCity(address.getCityForUrl())
                             .closeCookiePolicy();
                 });
-//                step("Выбрать город", () -> {
-//                    mainPage.selectCity(address.getCity())
-//                            .closeCookiePolicy();
-//                });
                 step("Открыть карточку товара", () -> {
                     mainPage.openProductCard(simpleItem.getItemName());
                 });
                 step("Добавить простой товар в корзину", () -> {
-                    //mainPage.addProductToCartFromPopup();
                     productCardPopup.addProductToCard();
                 });
                 step("Выбрать способ доставки", () -> {
@@ -71,7 +57,6 @@ public class AddToCartTests extends TestBase {
                 });
                 step("Выбрать адрес самовывоза", () -> {
                     pizzeriasPopUp.choosePickupAddress(address);
-                    //mainPage.choosePickupAddress(address);
                 });
                 step("Открыть корзину", () -> {
                     mainPage.openCart();
@@ -79,10 +64,7 @@ public class AddToCartTests extends TestBase {
                 step("Проверить, что товар добавлен в корзину", () -> {
                     cartPopupCommon.checkItemName(simpleItem.getItemName())
                             .checkItemPrice(simpleItem.getItemName(), simpleItem.getItemPrice());
-                    //mainPage.checkThatItemInCart_test(simpleItem);
                 });
-            }
-        }
     }
 
     @DisplayName("Простой товар можно добавить в корзину  с главной страницы. " +
@@ -91,23 +73,20 @@ public class AddToCartTests extends TestBase {
     @Owner("rybinaa")
     @Severity(SeverityLevel.NORMAL)
     void simpleItemShouldBeAddedToCartFromMainPage() throws Exception {
-        try (InputStream inputStreamForAddress = classLoader
-                .getResourceAsStream("testData/pickupAddress.json")) {
-            ObjectMapper mapperForAddress = new ObjectMapper();
-            PickupAddress address = mapperForAddress.readValue(inputStreamForAddress, PickupAddress.class);
+        SimpleItem simpleItem = SimpleItem.createSimpleItemFromJsonFile("testData/simpleDefaultProduct.json");
+        PickupAddress address = PickupAddress.createPickupAddressFromJsonFile("testData/pickupAddress.json");
 
-            try (InputStream inputStream = classLoader
-                    .getResourceAsStream("testData/simpleDefaultProduct.json")) {
-                ObjectMapper mapper = new ObjectMapper();
-                SimpleItem simpleItem = mapper.readValue(inputStream, SimpleItem.class);
-
-                step("Открыть страницу", () -> {
-                    mainPage.openPage();
-                });
-                step("Выбрать город", () -> {
-                    mainPage.selectCity(address.getCity())
-                            .closeCookiePolicy();
-                });
+//                step("Открыть страницу", () -> {
+//                    mainPage.openPage();
+//                });
+//                step("Выбрать город", () -> {
+//                    mainPage.selectCity(address.getCity())
+//                            .closeCookiePolicy();
+//                });
+        step("Открыть страницу", () -> {
+            mainPage.openPageWithSelectedCity(address.getCityForUrl())
+                    .closeCookiePolicy();
+        });
                 step("Добавить простой товар в корзину", () -> {
                     mainPage.addProductToCartFromMainPage(simpleItem);
                 });
@@ -123,8 +102,6 @@ public class AddToCartTests extends TestBase {
                 step("Проверить, что товар добавлен в корзину", () -> {
                     mainPage.checkThatItemInCart_test(simpleItem);
                 });
-            }
-        }
     }
 
     @DisplayName("Пиццу с дефолтными модификаторами можно добавить в корзину с главной страницы. " +
@@ -133,24 +110,21 @@ public class AddToCartTests extends TestBase {
     @Owner("rybinaa")
     @Severity(SeverityLevel.NORMAL)
     void pizzaWithDefaultModifiersShouldBeAddedToCart() throws Exception {
-        try (InputStream inputStreamForAddress = classLoader
-                .getResourceAsStream("testData/deliveryAddressWithAllFieldsAreFilled.json")) {
-            ObjectMapper mapperForAddress = new ObjectMapper();
-            DeliveryAddress address = mapperForAddress.readValue(inputStreamForAddress, DeliveryAddress.class);
+        PizzaItem pizzaItem = PizzaItem.createPizzaItemFromJsonFile("testData/pizzaWithDefaultIngredients.json");
+        DeliveryAddress address = DeliveryAddress.createDeliveryAddressFromJsonFile("testData/deliveryAddressWithAllFieldsAreFilled.json");
 
-            try (InputStream inputStream = classLoader
-                    .getResourceAsStream("testData/pizzaWithDefaultIngredients.json")) {
-                ObjectMapper mapper = new ObjectMapper();
-                PizzaItem pizzaItem = mapper.readValue(inputStream, PizzaItem.class);
-
-                step("Открыть страницу", () -> {
-                    mainPage.openPage();
-                });
-
-                step("Выбрать город", () -> {
-                    mainPage.selectCity(address.getCity())
-                            .closeCookiePolicy();
-                });
+//                step("Открыть страницу", () -> {
+//                    mainPage.openPage();
+//                });
+//
+//                step("Выбрать город", () -> {
+//                    mainPage.selectCity(address.getCity())
+//                            .closeCookiePolicy();
+//                });
+        step("Открыть страницу", () -> {
+            mainPage.openPageWithSelectedCity(address.getCityForUrl())
+                    .closeCookiePolicy();
+        });
 
                 step("Открыть карточку товара", () -> {
                     mainPage.openProductCardInCategory(pizzaItem.getPizzaName(), PIZZA);
@@ -173,8 +147,6 @@ public class AddToCartTests extends TestBase {
                 step("Проверить, что пицца добавлена в корзину", () -> {
                     mainPage.checkThatPizzaItemInCart_test(pizzaItem);
                 });
-            }
-        }
     }
 
     @DisplayName("Пиццу с модификаторами можно добавить в корзину с главной страницы. " +
@@ -183,23 +155,20 @@ public class AddToCartTests extends TestBase {
     @Owner("rybinaa")
     @Severity(SeverityLevel.NORMAL)
     void pizzaWithModifiersShouldBeAddedToCart() throws Exception {
-        try (InputStream inputStreamForAddress = classLoader
-                .getResourceAsStream("testData/deliveryAddressWithAllFieldsAreFilled.json")) {
-            ObjectMapper mapperForAddress = new ObjectMapper();
-            DeliveryAddress address = mapperForAddress.readValue(inputStreamForAddress, DeliveryAddress.class);
+        PizzaItem pizzaItem = PizzaItem.createPizzaItemFromJsonFile("testData/pizzaWithChangedIngredients.json");
+        DeliveryAddress address = DeliveryAddress.createDeliveryAddressFromJsonFile("testData/deliveryAddressWithAllFieldsAreFilled.json");
 
-            try (InputStream inputStream = classLoader
-                    .getResourceAsStream("testData/pizzaWithChangedIngredients.json")) {
-                ObjectMapper mapper = new ObjectMapper();
-                PizzaItem pizzaItem = mapper.readValue(inputStream, PizzaItem.class);
-
-                step("Открыть страницу", () -> {
-                    mainPage.openPage();
-                });
-                step("Выбрать город", () -> {
-                    mainPage.selectCity(address.getCity())
-                            .closeCookiePolicy();
-                });
+//                step("Открыть страницу", () -> {
+//                    mainPage.openPage();
+//                });
+//                step("Выбрать город", () -> {
+//                    mainPage.selectCity(address.getCity())
+//                            .closeCookiePolicy();
+//                });
+        step("Открыть страницу", () -> {
+            mainPage.openPageWithSelectedCity(address.getCityForUrl())
+                    .closeCookiePolicy();
+        });
                 step("Открыть карточку товара", () -> {
                     mainPage.openProductCardInCategory(pizzaItem.getPizzaName(), PIZZA);
                 });
@@ -227,8 +196,6 @@ public class AddToCartTests extends TestBase {
                 step("Проверить, что пицца добавлена в корзину", () -> {
                     mainPage.checkThatPizzaItemInCart_test(pizzaItem);
                 });
-            }
-        }
     }
 
     @DisplayName("Комбо товар с дефолтными продуктами можно добавить в корзину с главной страницы. " +
@@ -237,24 +204,21 @@ public class AddToCartTests extends TestBase {
     @Owner("rybinaa")
     @Severity(SeverityLevel.NORMAL)
     void comboItemWithDefaultProductsShouldBeAddedToCart() throws Exception {
-        try (InputStream inputStreamForAddress = classLoader
-                .getResourceAsStream("testData/pickupAddress.json")) {
-            ObjectMapper mapperForAddress = new ObjectMapper();
-            PickupAddress address = mapperForAddress.readValue(inputStreamForAddress, PickupAddress.class);
+        ComboItem comboItem = ComboItem.createComboItemFromJsonFile("testData/comboWithDefaultProducts.json");
+        PickupAddress address = PickupAddress.createPickupAddressFromJsonFile("testData/pickupAddress.json");
 
-            try (InputStream inputStream = classLoader
-                    .getResourceAsStream("testData/comboWithDefaultProducts.json")) {
-                ObjectMapper mapper = new ObjectMapper();
-                ComboItem comboItem = mapper.readValue(inputStream, ComboItem.class);
-
-                step("Открыть страницу", () -> {
-                    mainPage.openPage();
-                });
-
-                step("Выбрать город", () -> {
-                    mainPage.selectCity(address.getCity())
-                            .closeCookiePolicy();
-                });
+//                step("Открыть страницу", () -> {
+//                    mainPage.openPage();
+//                });
+//
+//                step("Выбрать город", () -> {
+//                    mainPage.selectCity(address.getCity())
+//                            .closeCookiePolicy();
+//                });
+        step("Открыть страницу", () -> {
+            mainPage.openPageWithSelectedCity(address.getCityForUrl())
+                    .closeCookiePolicy();
+        });
 
                 step("Открыть карточку комбо-товара", () -> {
                     mainPage.openProductCard(comboItem.getComboName());
@@ -278,8 +242,6 @@ public class AddToCartTests extends TestBase {
                 step("Проверить, что комбо-товар добавлен в корзину", () -> {
                     mainPage.checkThatComboItemInCart_test(comboItem);
                 });
-            }
-        }
     }
 
     @DisplayName("Комбо товар с измененными продуктами можно добавить в корзину с главной страницы. " +
@@ -288,23 +250,20 @@ public class AddToCartTests extends TestBase {
     @Owner("rybinaa")
     @Severity(SeverityLevel.NORMAL)
     void comboItemWithModifiedProductsShouldBeAddedToCart_testNewObjectStructure() throws Exception {
-        try (InputStream inputStreamForAddress = classLoader
-                .getResourceAsStream("testData/deliveryAddressWithAllFieldsAreFilled.json")) {
-            ObjectMapper mapperForAddress = new ObjectMapper();
-            DeliveryAddress address = mapperForAddress.readValue(inputStreamForAddress, DeliveryAddress.class);
+        ComboItem comboItem = ComboItem.createComboItemFromJsonFile("testData/combo4ProductsWithModifiedProducts.json");
+        DeliveryAddress address = DeliveryAddress.createDeliveryAddressFromJsonFile("testData/deliveryAddressWithAllFieldsAreFilled.json");
 
-            try (InputStream inputStream = classLoader
-                    .getResourceAsStream("testData/combo4ProductsWithModifiedProducts.json")) {
-                ObjectMapper mapper = new ObjectMapper();
-                ComboItem comboItem = mapper.readValue(inputStream, ComboItem.class);
-
-                step("Открыть страницу", () -> {
-                    mainPage.openPage();
-                });
-                step("Выбрать город", () -> {
-                    mainPage.selectCity(address.getCity())
-                            .closeCookiePolicy();
-                });
+//                step("Открыть страницу", () -> {
+//                    mainPage.openPage();
+//                });
+//                step("Выбрать город", () -> {
+//                    mainPage.selectCity(address.getCity())
+//                            .closeCookiePolicy();
+//                });
+        step("Открыть страницу", () -> {
+            mainPage.openPageWithSelectedCity(address.getCityForUrl())
+                    .closeCookiePolicy();
+        });
                 step("Открыть карточку комбо-товара", () -> {
                     mainPage.openProductCardInCategory(comboItem.getComboName(), COMBO);
                 });
@@ -333,6 +292,4 @@ public class AddToCartTests extends TestBase {
                     mainPage.checkThatComboItemInCart_test(comboItem);
                 });
             }
-        }
-    }
 }
