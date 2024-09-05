@@ -11,29 +11,33 @@ import static com.codeborne.selenide.Selenide.$;
 public class CartPopupPizza {
     private final ElementsCollection productCardsInCart = $(".scroll__view").$$("article");
 
-    public void checkPizzaDough(String pizzaName, String pizzaDough) {
+    public CartPopupPizza checkPizzaDough(String pizzaName, String pizzaDough) {
         productCardsInCart.findBy(text(pizzaName)).closest("section")
                 .shouldHave(text(pizzaDough));
+        return this;
     }
 
-    public void checkPizzaSize(String pizzaName, String pizzaSize) {
+    public CartPopupPizza checkPizzaSize(String pizzaName, String pizzaSize) {
         productCardsInCart.findBy(text(pizzaName)).closest("section")
                 .shouldHave(text(pizzaSize));
+        return this;
     }
 
-    public void checkPizzaAddedIngredients(PizzaItem pizzaItem) {
+    public CartPopupPizza checkPizzaAddedIngredients(PizzaItem pizzaItem) {
         for (AdditiveItem additiveItem : pizzaItem.getAdditiveItems()) {
             productCardsInCart.findBy(text(pizzaItem.getPizzaName())).closest("section")
                     .find(withText("+"))
                     .shouldHave(text(additiveItem.getItemName()));
         }
+        return this;
     }
 
-    public void checkPizzaExcludedIngredients(PizzaItem pizzaItem) {
+    public CartPopupPizza checkPizzaExcludedIngredients(PizzaItem pizzaItem) {
         for (AdditiveItem excludedItem : pizzaItem.getExcludedItems()) {
             productCardsInCart.findBy(text(pizzaItem.getPizzaName())).closest("section")
                     .find(withText("−"))
                     .shouldHave(text(excludedItem.getItemName()));
         }
+        return this;
     }
 }

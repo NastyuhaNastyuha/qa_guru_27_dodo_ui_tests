@@ -1,6 +1,8 @@
 package pages.components;
 
 import com.codeborne.selenide.SelenideElement;
+import data.DeliveryMethodsEnum;
+import pages.MainPage;
 
 import java.time.Duration;
 

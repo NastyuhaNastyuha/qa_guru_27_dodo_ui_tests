@@ -2,7 +2,9 @@ package pages.components;
 
 import com.codeborne.selenide.SelenideElement;
 import models.AdditiveItem;
+import models.ComboItem;
 import models.SimpleItem;
+import pages.MainPage;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -35,5 +37,25 @@ public class ComboCardPopup {
         }
         toppingsSaveButton.click();
         return surcharge;
+    }
+
+    public ComboCardPopup replaceItemInComboWithOrder(ComboItem comboItem, int order) {
+        for (SimpleItem product : comboItem.getProducts()) {
+            if (product.getItemOrderInCombo() == order) {
+                int price = comboItem.getComboPrice() + replaceSimpleItemInCombo(product);
+                comboItem.setComboPrice(price);
+            }
+        }
+        return this;
+    }
+
+    public ComboCardPopup changeItemIngredientsInCombo(ComboItem comboItem, int order) {
+        for (SimpleItem product : comboItem.getProducts()) {
+            if (product.getItemOrderInCombo() == order) {
+                int price = comboItem.getComboPrice() + changeItemIngredientsInCombo(product);
+                comboItem.setComboPrice(price);
+            }
+        }
+        return this;
     }
 }

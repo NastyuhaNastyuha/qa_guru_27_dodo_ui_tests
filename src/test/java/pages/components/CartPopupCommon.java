@@ -1,14 +1,15 @@
 package pages.components;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartPopupCommon {
     private final ElementsCollection productCardsInCart = $(".scroll__view").$$("article");
+    private final SelenideElement itemsInCartCounter = $("[data-testid='cart-button__quantity']");
 
     public CartPopupCommon checkItemName(String itemName) {
         productCardsInCart.findBy(text(itemName)).shouldBe(visible);
@@ -29,6 +30,11 @@ public class CartPopupCommon {
 //                .get(product.getItemOrderInCombo() - 1).shouldHave(text(topping.getItemName()));
 
         productCardsInCart.findBy(text(productName)).parent().shouldHave(text(toppingName));
+        return this;
+    }
+
+    public CartPopupCommon checkThatItemsInCartCounterNotEmpty() {
+        itemsInCartCounter.should(exist);
         return this;
     }
 }
