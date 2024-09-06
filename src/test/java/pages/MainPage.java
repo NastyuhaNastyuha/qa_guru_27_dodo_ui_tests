@@ -27,6 +27,7 @@ public class MainPage {
     }
 
     public MainPage closeCookiePolicy() {
+        closeCookiePolicyToastify.shouldBe(interactable);
         closeCookiePolicyToastify.click();
         return this;
     }
@@ -40,6 +41,7 @@ public class MainPage {
         menu.$$("li").findBy(text(category.getName())).click();
 //        Thread.sleep(1000);
 //        $(category.getSelector()).find(byText(productName)).shouldBe(visible);
+        sleep(1000);
         $(category.getSelector()).find(byText(productName)).shouldBe(interactable);
         $(category.getSelector()).find(byText(productName)).click();
         return this;
