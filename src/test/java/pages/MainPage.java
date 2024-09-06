@@ -26,8 +26,8 @@ public class MainPage {
         return this;
     }
 
-    public MainPage closeCookiePolicy() {
-        closeCookiePolicyButton.shouldBe(visible);
+    public MainPage closeCookiePolicy() throws InterruptedException {
+        closeCookiePolicyButton.wait();
         closeCookiePolicyButton.click();
         return this;
     }
