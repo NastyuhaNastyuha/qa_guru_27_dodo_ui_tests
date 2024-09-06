@@ -1,11 +1,10 @@
-package components;
+package pages.components;
 
 import com.codeborne.selenide.SelenideElement;
-import models.testDataModels.DeliveryAddress;
+import models.DeliveryAddress;
 
-import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Selenide.$;
 
 public class NewAddressPopup {
@@ -21,9 +20,9 @@ public class NewAddressPopup {
     public void enterNewAddress(DeliveryAddress address) {
         addressInput.click();
         addressInput.setValue(address.getAddress());
-        firstAddressSuggestion.shouldBe(visible, Duration.ofSeconds(10));
+        firstAddressSuggestion.shouldBe(interactable);
         firstAddressSuggestion.click();
-        entranceInput.shouldBe(visible, Duration.ofSeconds(10));
+        entranceInput.shouldBe(interactable);
         entranceInput.click();
         entranceInput.setValue(address.getEntrance());
         doorCodeInput.click();

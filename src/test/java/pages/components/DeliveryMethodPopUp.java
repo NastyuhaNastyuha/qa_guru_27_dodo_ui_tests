@@ -1,10 +1,8 @@
-package components;
+package pages.components;
 
 import com.codeborne.selenide.SelenideElement;
 
-import java.time.Duration;
-
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Selenide.$;
 
 public class DeliveryMethodPopUp {
@@ -13,12 +11,12 @@ public class DeliveryMethodPopUp {
     private final SelenideElement closePopupButton = $(".popup-inner").$("svg");
 
     public void choosePickup() {
-        pickupButton.shouldBe(visible, Duration.ofSeconds(30));
+        pickupButton.shouldBe(interactable);
         pickupButton.click();
     }
 
     public void chooseDelivery() {
-        deliveryButton.shouldBe(visible, Duration.ofSeconds(30));
+        deliveryButton.shouldBe(interactable);
         deliveryButton.click();
     }
 
