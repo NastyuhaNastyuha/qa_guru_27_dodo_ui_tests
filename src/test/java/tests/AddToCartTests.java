@@ -1,6 +1,5 @@
 package tests;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
@@ -8,15 +7,10 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import models.*;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.MainPage;
 import pages.components.*;
 
-import java.io.InputStream;
-
-import static data.DeliveryMethodsEnum.DELIVERY;
-import static data.DeliveryMethodsEnum.PICKUP;
 import static io.qameta.allure.Allure.*;
 import static data.ProductCategoryEnum.COMBO;
 import static data.ProductCategoryEnum.PIZZA;
@@ -27,7 +21,6 @@ import static data.ProductCategoryEnum.PIZZA;
 public class AddToCartTests extends TestBase {
 
     MainPage mainPage = new MainPage();
-    ClassLoader classLoader = AddToCartTests.class.getClassLoader();
     CartPopupCommon cartPopupCommon = new CartPopupCommon();
     ProductCardPopup productCardPopup = new ProductCardPopup();
     ComboCardPopup comboCardPopup = new ComboCardPopup();
@@ -81,13 +74,6 @@ public class AddToCartTests extends TestBase {
         SimpleItem simpleItem = SimpleItem.createSimpleItemFromJsonFile("testData/simpleDefaultProduct.json");
         PickupAddress address = PickupAddress.createPickupAddressFromJsonFile("testData/pickupAddress.json");
 
-//                step("Открыть страницу", () -> {
-//                    mainPage.openPage();
-//                });
-//                step("Выбрать город", () -> {
-//                    mainPage.selectCity(address.getCity())
-//                            .closeCookiePolicy();
-//                });
         step("Открыть страницу", () -> {
             mainPage.openPageWithSelectedCity(address.getCityForUrl())
                     .closeCookiePolicy();
@@ -96,18 +82,15 @@ public class AddToCartTests extends TestBase {
                     mainPage.addProductToCartFromMainPage(simpleItem);
                 });
                 step("Выбрать способ доставки", () -> {
-                    //mainPage.chooseDeliveryMethod(PICKUP);
                     deliveryMethodPopUp.choosePickup();
                 });
                 step("Выбрать адрес самовывоза", () -> {
-                    //mainPage.choosePickupAddress(address);
                     pizzeriasPopUp.choosePickupAddress(address);
                 });
                 step("Открыть корзину", () -> {
                     mainPage.openCart();
                 });
                 step("Проверить, что товар добавлен в корзину", () -> {
-                    //mainPage.checkThatItemInCart_test(simpleItem);
                     cartPopupCommon.checkItemName(simpleItem.getItemName())
                             .checkItemPrice(simpleItem.getItemName(), simpleItem.getItemPrice());
                 });
@@ -126,30 +109,23 @@ public class AddToCartTests extends TestBase {
             mainPage.openPageWithSelectedCity(address.getCityForUrl())
                     .closeCookiePolicy();
         });
-
                 step("Открыть карточку товара", () -> {
                     mainPage.openProductCardInCategory(pizzaItem.getPizzaName(), PIZZA);
-
                 });
                 step("Добавить пиццу в корзину", () -> {
-                    //mainPage.addProductToCartFromPopup();
                     productCardPopup.addProductToCard();
                 });
 
                 step("Выбрать способ доставки", () -> {
-                    //mainPage.chooseDeliveryMethod(DELIVERY);
                     deliveryMethodPopUp.chooseDelivery();
                 });
                 step("Ввести адрес доставки", () -> {
-                    //mainPage.enterDeliveryAddress(address);
                     newAddressPopup.enterNewAddress(address);
                 });
                 step("Открыть корзину", () -> {
                     mainPage.openCart();
                 });
-
                 step("Проверить, что пицца добавлена в корзину", () -> {
-                    //mainPage.checkThatPizzaItemInCart_test(pizzaItem);
                     cartPopupCommon.checkItemName(pizzaItem.getPizzaName())
                             .checkItemPrice(pizzaItem.getPizzaName(), pizzaItem.getPizzaPrice());
                     cartPopupPizza.checkPizzaDough(pizzaItem.getPizzaName(), pizzaItem.getDough())
@@ -174,38 +150,39 @@ public class AddToCartTests extends TestBase {
                     mainPage.openProductCardInCategory(pizzaItem.getPizzaName(), PIZZA);
                 });
                 step("Выбрать тесто и размер пиццы", () -> {
-                    //mainPage.changePizzaDoughAndSize(pizzaItem);
                     productCardPopup.selectPizzaDoughAndSize(pizzaItem);
                 });
                 step("Исключить базовые ингредиенты из пиццы", () -> {
-                    //mainPage.removeBaseIngredientsFromPizza(pizzaItem);
                     productCardPopup.removeBaseIngredientsFromPizza(pizzaItem);
                 });
                 step("Добавить дополнительные ингредиенты в пиццу", () -> {
-                    //mainPage.addIngredientsToPizza(pizzaItem);
                     productCardPopup.chooseAdditiveIngredientsForPizza(pizzaItem);
                 });
                 step("Добавить пиццу в корзину", () -> {
-                    //mainPage.addProductToCartFromPopup();
                     productCardPopup.addProductToCard();
                 });
                 step("Выбрать способ доставки", () -> {
-                    //mainPage.chooseDeliveryMethod(DELIVERY);
                     deliveryMethodPopUp.chooseDelivery();
                 });
                 step("Ввести адрес доставки", () -> {
-                    //mainPage.enterDeliveryAddress(address);
                     newAddressPopup.enterNewAddress(address);
                 });
                 step("Открыть корзину", () -> {
                     mainPage.openCart();
                 });
-                step("Проверить, что пицца добавлена в корзину", () -> {
-                    //mainPage.checkThatPizzaItemInCart_test(pizzaItem);
-                    cartPopupCommon.checkItemName(pizzaItem.getPizzaName())
-                            .checkItemPrice(pizzaItem.getPizzaName(), pizzaItem.getPizzaPrice());
+                step("Проверить название и цену пиццы в корзине", () -> {
+                            cartPopupCommon.checkItemName(pizzaItem.getPizzaName())
+                                    .checkItemPrice(pizzaItem.getPizzaName(), pizzaItem.getPizzaPrice());
+                        });
+                step("Проверить выбранные тесто и размер пиццы", () -> {
                     cartPopupPizza.checkPizzaDough(pizzaItem.getPizzaName(), pizzaItem.getDough())
                             .checkPizzaSize(pizzaItem.getPizzaName(), pizzaItem.getPizzaSize().getSize());
+                });
+                step("Проверить добавленные в пиццу ингредиенты", () -> {
+                    cartPopupPizza.checkPizzaAddedIngredients(pizzaItem);
+                });
+                step("Проверить, что из пиццы исключены выбранные ингредиенты", () -> {
+                    cartPopupPizza.checkPizzaExcludedIngredients(pizzaItem);
                 });
     }
 
@@ -218,14 +195,6 @@ public class AddToCartTests extends TestBase {
         ComboItem comboItem = ComboItem.createComboItemFromJsonFile("testData/comboWithDefaultProducts.json");
         PickupAddress address = PickupAddress.createPickupAddressFromJsonFile("testData/pickupAddress.json");
 
-//                step("Открыть страницу", () -> {
-//                    mainPage.openPage();
-//                });
-//
-//                step("Выбрать город", () -> {
-//                    mainPage.selectCity(address.getCity())
-//                            .closeCookiePolicy();
-//                });
         step("Открыть страницу", () -> {
             mainPage.openPageWithSelectedCity(address.getCityForUrl())
                     .closeCookiePolicy();
@@ -236,25 +205,19 @@ public class AddToCartTests extends TestBase {
                 });
 
                 step("Добавить комбо-товар в корзину", () -> {
-                    //mainPage.addComboToCartFromPopup();
                     comboCardPopup.addComboToCart();
                 });
 
                 step("Выбрать способ доставки", () -> {
-                    //mainPage.chooseDeliveryMethod(PICKUP);
                     deliveryMethodPopUp.choosePickup();
                 });
                 step("Выбрать адрес самовывоза", () -> {
-                    //mainPage.choosePickupAddress(address);
                     pizzeriasPopUp.choosePickupAddress(address);
                 });
-
                 step("Открыть корзину", () -> {
                     mainPage.openCart();
                 });
-
                 step("Проверить, что комбо-товар добавлен в корзину", () -> {
-                    //mainPage.checkThatComboItemInCart_test(comboItem);
                     cartPopupCommon.checkItemName(comboItem.getComboName())
                             .checkItemPrice(comboItem.getComboName(), comboItem.getComboPrice());
                 });
@@ -269,13 +232,6 @@ public class AddToCartTests extends TestBase {
         ComboItem comboItem = ComboItem.createComboItemFromJsonFile("testData/combo4ProductsWithModifiedProducts.json");
         DeliveryAddress address = DeliveryAddress.createDeliveryAddressFromJsonFile("testData/deliveryAddressWithAllFieldsAreFilled.json");
 
-//                step("Открыть страницу", () -> {
-//                    mainPage.openPage();
-//                });
-//                step("Выбрать город", () -> {
-//                    mainPage.selectCity(address.getCity())
-//                            .closeCookiePolicy();
-//                });
         step("Открыть страницу", () -> {
             mainPage.openPageWithSelectedCity(address.getCityForUrl())
                     .closeCookiePolicy();
@@ -284,36 +240,31 @@ public class AddToCartTests extends TestBase {
                     mainPage.openProductCardInCategory(comboItem.getComboName(), COMBO);
                 });
                 step("Заменить второй товар в комбо", () -> {
-                    //mainPage.replaceItemInComboWithOrder(comboItem, 2);
                     comboCardPopup.replaceItemInComboWithOrder(comboItem, 2);
                 });
                 step("Заменить третий товар в комбо", () -> {
-                    //mainPage.replaceItemInComboWithOrder(comboItem, 3);
                     comboCardPopup.replaceItemInComboWithOrder(comboItem, 3);
                 });
                 step("Изменить состав четвертого товара в комбо", () -> {
-                    //mainPage.changeItemIngredientsInCombo(comboItem, 4);
                     comboCardPopup.changeItemIngredientsInCombo(comboItem, 4);
                 });
                 step("Добавить комбо-товар в корзину", () -> {
-                    //mainPage.addComboToCartFromPopup();
                     comboCardPopup.addComboToCart();
                 });
                 step("Выбрать способ доставки", () -> {
-                    //mainPage.chooseDeliveryMethod(DELIVERY);
                     deliveryMethodPopUp.chooseDelivery();
                 });
                 step("Ввести адрес доставки", () -> {
-                    //mainPage.enterDeliveryAddress(address);
                     newAddressPopup.enterNewAddress(address);
                 });
                 step("Открыть корзину", () -> {
                     mainPage.openCart();
                 });
                 step("Проверить, что комбо-товар добавлен в корзину", () -> {
-                    //mainPage.checkThatComboItemInCart_test(comboItem);
                     cartPopupCommon.checkItemName(comboItem.getComboName())
                             .checkItemPrice(comboItem.getComboName(), comboItem.getComboPrice());
+                });
+                step("Проверить примененные модификации товаров в комбо", () -> {
                     cartPopupCombo.checkSimpleItemsInCombo(comboItem);
                 });
             }

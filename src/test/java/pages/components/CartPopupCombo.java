@@ -24,9 +24,7 @@ public class CartPopupCombo {
                     productCardsInCart.findBy(text(comboItem.getComboName())).parent().$$(".group")
                             .get(product.getItemOrderInCombo() - 1).shouldHave(text(topping.getItemName()));
                 });
-
             }
-
         }
     }
 }

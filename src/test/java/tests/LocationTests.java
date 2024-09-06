@@ -13,8 +13,6 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import pages.MainPage;
 import pages.components.*;
 
-import static data.DeliveryMethodsEnum.DELIVERY;
-import static data.DeliveryMethodsEnum.PICKUP;
 import static io.qameta.allure.Allure.step;
 
 @Story("Создание заказа")
@@ -42,8 +40,6 @@ public class LocationTests extends TestBase {
             });
 
             step("Выбрать город", () -> {
-//                mainPage.selectCity(firstCity)
-//                        .closeCookiePolicy();
                 selectCityPopUp.selectCityBySearch(firstCity);
                 mainPage.closeCookiePolicy();
             });
@@ -52,35 +48,28 @@ public class LocationTests extends TestBase {
                 mainPage.addProductToCartFromMainPage(simpleItem);
             });
             step("Выбрать способ доставки", () -> {
-                //mainPage.chooseDeliveryMethod(PICKUP);
                 deliveryMethodPopUp.choosePickup();
             });
             step("Проверить наличие выбранного города в адресе пиццерий", () -> {
-                //mainPage.checkCityInPickupAddress(firstCity);
                 pizzeriasPopUp.checkCityInPickupAddress(firstCity);
             });
             step("Закрыть модальные окна выбора адреса доставки и метода доставки", () -> {
                 pizzeriasPopUp.closePopup();
-                //mainPage.closePizzeriasPopup();
-                        //.closeDeliveryMethodPopup();
                 deliveryMethodPopUp.closePopup();
             });
             step("Открыть модальное окно выбора города", () -> {
                 mainPage.openSelectCityPopup();
             });
             step("Выбрать город", () -> {
-                //mainPage.selectCity(secondCity);
                 selectCityPopUp.selectCityBySearch(secondCity);
             });
             step("Добавить простой товар в корзину", () -> {
                 mainPage.addProductToCartFromMainPage(simpleItem);
             });
             step("Выбрать способ доставки", () -> {
-                //mainPage.chooseDeliveryMethod(PICKUP);
                 deliveryMethodPopUp.choosePickup();
             });
             step("Проверить наличие выбранного города в адресе пиццерий", () -> {
-                //mainPage.checkCityInPickupAddress(secondCity);
                 pizzeriasPopUp.checkCityInPickupAddress(secondCity);
             });
     }
@@ -98,8 +87,6 @@ public class LocationTests extends TestBase {
                 mainPage.openPage();
             });
         step("Выбрать город", () -> {
-//                mainPage.selectCity(firstCity)
-//                        .closeCookiePolicy();
             selectCityPopUp.selectCityBySearch(address.getCity());
             mainPage.closeCookiePolicy();
         });
@@ -107,15 +94,12 @@ public class LocationTests extends TestBase {
                 mainPage.addProductToCartFromMainPage(simpleItem);
             });
             step("Выбрать способ доставки", () -> {
-                //mainPage.chooseDeliveryMethod(DELIVERY);
                 deliveryMethodPopUp.chooseDelivery();
             });
             step("Ввести адрес доставки", () -> {
-                //mainPage.enterDeliveryAddress(address);
                 newAddressPopup.enterNewAddress(address);
             });
             step("Проверить, что корзина не пуста", () -> {
-                //mainPage.checkThatItemsInCartCounterNotEmpty();
                 cartPopupCommon.checkThatItemsInCartCounterNotEmpty();
             });
     }

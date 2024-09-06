@@ -14,11 +14,15 @@ public class MainPage {
     private final SelenideElement cityButton = $("[data-testid='header__about-slogan-text_link']");
     private final SelenideElement cartButton = $("[data-testid='navigation__cart']");
     private final SelenideElement closeCookiePolicyToastify = $(".cookie-policy-button");
-    private final SelenideElement itemsInCartCounter = $("[data-testid='cart-button__quantity']");
     private final SelenideElement menu = $("nav");
 
     public MainPage openPage() {
         open("");
+        return this;
+    }
+
+    public MainPage openPageWithSelectedCity(String city) {
+        open("/" + city);
         return this;
     }
 
@@ -32,10 +36,11 @@ public class MainPage {
         return this;
     }
 
-    public MainPage openProductCardInCategory(String productName, ProductCategoryEnum category) throws InterruptedException {
+    public MainPage openProductCardInCategory(String productName, ProductCategoryEnum category) {
         menu.$$("li").findBy(text(category.getName())).click();
-        Thread.sleep(1000);
-        $(category.getSelector()).find(byText(productName)).shouldBe(visible);
+//        Thread.sleep(1000);
+//        $(category.getSelector()).find(byText(productName)).shouldBe(visible);
+        $(category.getSelector()).find(byText(productName)).shouldBe(interactable);
         $(category.getSelector()).find(byText(productName)).click();
         return this;
     }
@@ -54,11 +59,6 @@ public class MainPage {
 
     public MainPage openSelectCityPopup() {
         cityButton.click();
-        return this;
-    }
-
-    public MainPage openPageWithSelectedCity(String city) {
-        open("/" + city);
         return this;
     }
 }

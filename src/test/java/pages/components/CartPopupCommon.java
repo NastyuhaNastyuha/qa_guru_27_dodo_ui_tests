@@ -25,14 +25,6 @@ public class CartPopupCommon {
         return this;
     }
 
-    public CartPopupCommon checkToppingsInProduct(String productName, String toppingName) {
-//        productCardsInCart.findBy(text(comboItem.getComboName())).parent().$$(".group")
-//                .get(product.getItemOrderInCombo() - 1).shouldHave(text(topping.getItemName()));
-
-        productCardsInCart.findBy(text(productName)).parent().shouldHave(text(toppingName));
-        return this;
-    }
-
     public CartPopupCommon checkThatItemsInCartCounterNotEmpty() {
         itemsInCartCounter.should(exist);
         return this;

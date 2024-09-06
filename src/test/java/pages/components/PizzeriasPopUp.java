@@ -3,8 +3,10 @@ package pages.components;
 import com.codeborne.selenide.SelenideElement;
 import models.PickupAddress;
 
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class PizzeriasPopUp {
     private final SelenideElement pizzeriasList = $(".pizzerias-list-wrapper");
@@ -13,9 +15,11 @@ public class PizzeriasPopUp {
     private final SelenideElement pickupAddressItemInList = $(".list-item");
     private final SelenideElement closePopupButton = $(".popup-inner").$("svg");
 
-    public void choosePickupAddress(PickupAddress address) throws InterruptedException {
+    public void choosePickupAddress(PickupAddress address) {
         pizzeriasList.$$(".list-item").findBy(text(address.getAddress())).click();
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
+        //sleep(1000);
+        submitPickupAddressButton.shouldBe(interactable);
         submitPickupAddressButton.click();
     }
 
