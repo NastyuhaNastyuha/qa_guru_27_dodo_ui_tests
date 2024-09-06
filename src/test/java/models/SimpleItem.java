@@ -2,6 +2,7 @@ package models;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -18,8 +19,7 @@ public class SimpleItem {
     ArrayList<AdditiveItem> additiveItems;
 
     public static SimpleItem createSimpleItemFromJsonFile(String filePath) throws Exception {
-        try (InputStream inputStream = classLoader
-                .getResourceAsStream(filePath)) {
+        try (InputStream inputStream = classLoader.getResourceAsStream(filePath)) {
             ObjectMapper mapper = new ObjectMapper();
             return mapper.readValue(inputStream, SimpleItem.class);
         }

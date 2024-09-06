@@ -15,8 +15,7 @@ public class ComboItem {
     static ClassLoader classLoader = ComboItem.class.getClassLoader();
 
     public static ComboItem createComboItemFromJsonFile(String filePath) throws Exception {
-        try (InputStream inputStream = classLoader
-                .getResourceAsStream(filePath)) {
+        try (InputStream inputStream = classLoader.getResourceAsStream(filePath)) {
             ObjectMapper mapper = new ObjectMapper();
             return mapper.readValue(inputStream, ComboItem.class);
         }

@@ -27,7 +27,6 @@ public class MainPage {
     }
 
     public MainPage closeCookiePolicy() {
-        //closeCookiePolicyButton.shouldBe(interactable);
         closeCookiePolicyButton.shouldBe(visible);
         closeCookiePolicyButton.click();
         return this;
@@ -40,8 +39,6 @@ public class MainPage {
 
     public MainPage openProductCardInCategory(String productName, ProductCategoryEnum category) {
         menu.$$("li").findBy(text(category.getName())).click();
-//        Thread.sleep(1000);
-//        $(category.getSelector()).find(byText(productName)).shouldBe(visible);
         sleep(1000);
         $(category.getSelector()).find(byText(productName)).shouldBe(interactable);
         $(category.getSelector()).find(byText(productName)).click();
@@ -49,8 +46,8 @@ public class MainPage {
     }
 
     public MainPage addProductToCartFromMainPage(SimpleItem item) {
-        $("[data-testid='menu__meta-product_" + item.getItemId() + "']").
-                $("[data-testid='product__button']").click();
+        $("[data-testid='menu__meta-product_" + item.getItemId() + "']")
+                .$("[data-testid='product__button']").click();
         return this;
     }
 

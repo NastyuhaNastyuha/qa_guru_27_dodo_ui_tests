@@ -17,8 +17,7 @@ public class CartPopupCommon {
     }
 
     public CartPopupCommon checkItemPrice(String itemName, Integer itemPrice) {
-        String priceText = productCardsInCart.findBy(text(itemName))
-                .$(".current").getText();
+        String priceText = productCardsInCart.findBy(text(itemName)).$(".current").getText();
         String numericPriceText = priceText.replaceAll("[^0-9]", "");
         int actualPrice = Integer.parseInt(numericPriceText);
         assertThat(actualPrice).isEqualTo(itemPrice);

@@ -21,8 +21,8 @@ public class CartPopupCombo {
 
             for (AdditiveItem topping : product.getAdditiveItems()) {
                 step("Проверить, что для товара " + product.getItemOrderInCombo() + " добавлен топпинг", () -> {
-                    productCardsInCart.findBy(text(comboItem.getComboName())).parent().$$(".group")
-                            .get(product.getItemOrderInCombo() - 1).shouldHave(text(topping.getItemName()));
+                    productCardsInCart.findBy(text(comboItem.getComboName())).parent()
+                            .$$(".group").get(product.getItemOrderInCombo() - 1).shouldHave(text(topping.getItemName()));
                 });
             }
         }

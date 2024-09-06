@@ -11,13 +11,11 @@ public class DeliveryMethodPopUp {
     private final SelenideElement closePopupButton = $(".popup-inner").$("svg");
 
     public void choosePickup() {
-        //pickupButton.shouldBe(visible, Duration.ofSeconds(30));
         pickupButton.shouldBe(interactable);
         pickupButton.click();
     }
 
     public void chooseDelivery() {
-        //deliveryButton.shouldBe(visible, Duration.ofSeconds(30));
         deliveryButton.shouldBe(interactable);
         deliveryButton.click();
     }

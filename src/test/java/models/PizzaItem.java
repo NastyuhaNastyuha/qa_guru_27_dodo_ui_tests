@@ -13,14 +13,13 @@ public class PizzaItem {
     Integer pizzaPrice;
     PizzaSizeEnum pizzaSize;
     String dough;
-    ArrayList<AdditiveItem>  additiveItems;
-    ArrayList<AdditiveItem>  excludedItems;
+    ArrayList<AdditiveItem> additiveItems;
+    ArrayList<AdditiveItem> excludedItems;
 
     static ClassLoader classLoader = PizzaItem.class.getClassLoader();
 
     public static PizzaItem createPizzaItemFromJsonFile(String filePath) throws Exception {
-        try (InputStream inputStream = classLoader
-                .getResourceAsStream(filePath)) {
+        try (InputStream inputStream = classLoader.getResourceAsStream(filePath)) {
             ObjectMapper mapper = new ObjectMapper();
             return mapper.readValue(inputStream, PizzaItem.class);
         }

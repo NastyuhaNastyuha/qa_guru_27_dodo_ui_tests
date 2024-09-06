@@ -35,43 +35,43 @@ public class LocationTests extends TestBase {
     void chooseCityTest(String firstCity, String secondCity) throws Exception {
         SimpleItem simpleItem = SimpleItem.createSimpleItemFromJsonFile("testData/simpleDefaultProduct.json");
 
-            step("Открыть страницу", () -> {
-                mainPage.openPage();
-            });
+        step("Открыть страницу", () -> {
+            mainPage.openPage();
+        });
 
-            step("Выбрать город", () -> {
-                selectCityPopUp.selectCityBySearch(firstCity);
-                mainPage.closeCookiePolicy();
-            });
+        step("Выбрать город", () -> {
+            selectCityPopUp.selectCityBySearch(firstCity);
+            mainPage.closeCookiePolicy();
+        });
 
-            step("Добавить простой товар в корзину", () -> {
-                mainPage.addProductToCartFromMainPage(simpleItem);
-            });
-            step("Выбрать способ доставки", () -> {
-                deliveryMethodPopUp.choosePickup();
-            });
-            step("Проверить наличие выбранного города в адресе пиццерий", () -> {
-                pizzeriasPopUp.checkCityInPickupAddress(firstCity);
-            });
-            step("Закрыть модальные окна выбора адреса доставки и метода доставки", () -> {
-                pizzeriasPopUp.closePopup();
-                deliveryMethodPopUp.closePopup();
-            });
-            step("Открыть модальное окно выбора города", () -> {
-                mainPage.openSelectCityPopup();
-            });
-            step("Выбрать город", () -> {
-                selectCityPopUp.selectCityBySearch(secondCity);
-            });
-            step("Добавить простой товар в корзину", () -> {
-                mainPage.addProductToCartFromMainPage(simpleItem);
-            });
-            step("Выбрать способ доставки", () -> {
-                deliveryMethodPopUp.choosePickup();
-            });
-            step("Проверить наличие выбранного города в адресе пиццерий", () -> {
-                pizzeriasPopUp.checkCityInPickupAddress(secondCity);
-            });
+        step("Добавить простой товар в корзину", () -> {
+            mainPage.addProductToCartFromMainPage(simpleItem);
+        });
+        step("Выбрать способ доставки", () -> {
+            deliveryMethodPopUp.choosePickup();
+        });
+        step("Проверить наличие выбранного города в адресе пиццерий", () -> {
+            pizzeriasPopUp.checkCityInPickupAddress(firstCity);
+        });
+        step("Закрыть модальные окна выбора адреса доставки и метода доставки", () -> {
+            pizzeriasPopUp.closePopup();
+            deliveryMethodPopUp.closePopup();
+        });
+        step("Открыть модальное окно выбора города", () -> {
+            mainPage.openSelectCityPopup();
+        });
+        step("Выбрать город", () -> {
+            selectCityPopUp.selectCityBySearch(secondCity);
+        });
+        step("Добавить простой товар в корзину", () -> {
+            mainPage.addProductToCartFromMainPage(simpleItem);
+        });
+        step("Выбрать способ доставки", () -> {
+            deliveryMethodPopUp.choosePickup();
+        });
+        step("Проверить наличие выбранного города в адресе пиццерий", () -> {
+            pizzeriasPopUp.checkCityInPickupAddress(secondCity);
+        });
     }
 
     @Severity(SeverityLevel.NORMAL)
@@ -79,28 +79,28 @@ public class LocationTests extends TestBase {
     @CsvFileSource(resources = "/testData/deliveryAddresses.csv")
     @ParameterizedTest(name = "Можно ввести адрес доставки с заполнением полей: {0}")
     @DisplayName("Проверка заполнения адреса доставки")
-    void enterDeliveryAddressTest (String testName, String filePath) throws Exception {
+    void enterDeliveryAddressTest(String testName, String filePath) throws Exception {
         DeliveryAddress address = DeliveryAddress.createDeliveryAddressFromJsonFile(filePath);
         SimpleItem simpleItem = SimpleItem.createSimpleItemFromJsonFile("testData/simpleDefaultProduct.json");
 
-            step("Открыть страницу", () -> {
-                mainPage.openPage();
-            });
+        step("Открыть страницу", () -> {
+            mainPage.openPage();
+        });
         step("Выбрать город", () -> {
             selectCityPopUp.selectCityBySearch(address.getCity());
             mainPage.closeCookiePolicy();
         });
-            step("Добавить простой товар в корзину", () -> {
-                mainPage.addProductToCartFromMainPage(simpleItem);
-            });
-            step("Выбрать способ доставки", () -> {
-                deliveryMethodPopUp.chooseDelivery();
-            });
-            step("Ввести адрес доставки", () -> {
-                newAddressPopup.enterNewAddress(address);
-            });
-            step("Проверить, что корзина не пуста", () -> {
-                cartPopupCommon.checkThatItemsInCartCounterNotEmpty();
-            });
+        step("Добавить простой товар в корзину", () -> {
+            mainPage.addProductToCartFromMainPage(simpleItem);
+        });
+        step("Выбрать способ доставки", () -> {
+            deliveryMethodPopUp.chooseDelivery();
+        });
+        step("Ввести адрес доставки", () -> {
+            newAddressPopup.enterNewAddress(address);
+        });
+        step("Проверить, что корзина не пуста", () -> {
+            cartPopupCommon.checkThatItemsInCartCounterNotEmpty();
+        });
     }
 }
