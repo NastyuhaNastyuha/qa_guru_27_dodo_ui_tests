@@ -18,8 +18,8 @@ public class PizzeriasPopUp {
     public void choosePickupAddress(PickupAddress address) {
         pizzeriasList.$$(".list-item").findBy(text(address.getAddress())).click();
         //Thread.sleep(1000);
-        //sleep(1000);
-        submitPickupAddressButton.shouldBe(interactable);
+        sleep(1000);
+        //submitPickupAddressButton.shouldBe(interactable);
         submitPickupAddressButton.click();
     }
 
