@@ -13,7 +13,7 @@ public class MainPage {
     private final SelenideElement allProductsSection = $("main");
     private final SelenideElement cityButton = $("[data-testid='header__about-slogan-text_link']");
     private final SelenideElement cartButton = $("[data-testid='navigation__cart']");
-    private final SelenideElement closeCookiePolicyToastify = $(".cookie-policy-button");
+    private final SelenideElement closeCookiePolicyButton = $(".cookie-policy-button");
     private final SelenideElement menu = $("nav");
 
     public MainPage openPage() {
@@ -27,8 +27,9 @@ public class MainPage {
     }
 
     public MainPage closeCookiePolicy() {
-        closeCookiePolicyToastify.shouldBe(interactable);
-        closeCookiePolicyToastify.click();
+        //closeCookiePolicyButton.shouldBe(interactable);
+        closeCookiePolicyButton.shouldBe(visible);
+        closeCookiePolicyButton.click();
         return this;
     }
 
